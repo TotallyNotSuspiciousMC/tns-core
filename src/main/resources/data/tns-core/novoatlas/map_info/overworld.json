@@ -7,68 +7,76 @@
         "map": "tns-core:overworld",
         "biomes": [
             {
+                "biome": "minecraft:ocean",
+                "color": "#ffd400"
+            },
+            {
                 "biome": "minecraft:plains",
-                "color": "#6D923D"
+                "color": "#00ff0d"
+            },
+            {
+                "biome": "minecraft:sunflower_plains",
+                "color": "#ffd400"
             },
             {
                 "biome": "minecraft:beach",
-                "color": "#C4B058"
-            },
-            {
-                "biome": "minecraft:jungle",
-                "color": "#338C2A"
-            },
-            {
-                "biome": "minecraft:sparse_jungle",
-                "color": "#738533"
-            },
-            {
-                "biome": "minecraft:desert",
-                "color": "#AEA54A"
-            },
-            {
-                "biome": "minecraft:jagged_peaks",
-                "color": "#FFFFFF"
-            },
-            {
-                "biome": "minecraft:meadow",
-                "color": "#7FC458"
-            },
-            {
-                "biome": "minecraft:grove",
-                "color": "#8AAD88"
-            },
-            {
-                "biome": "minecraft:old_growth_spruce_taiga",
-                "color": "#224D20"
+                "color": "#e2ff8a"
             },
             {
                 "biome": "minecraft:stony_shore",
-                "color": "#525252"
+                "color": "#9ca974"
             },
             {
-                "biome": "minecraft:ocean",
-                "color": "#313A8B"
+                "biome": "minecraft:snowy_beach",
+                "color": "#eff6d8"
             },
             {
-                "biome": "minecraft:warm_ocean",
-                "color": "#474D90"
+                "biome": "minecraft:snowy_plains",
+                "color": "#ffffff"
             },
             {
-                "biome": "minecraft:cold_ocean",
-                "color": "#19248A"
+                "biome": "minecraft:ice_spikes",
+                "color": "#c1b6f5"
             },
             {
-                "biome": "minecraft:deep_ocean",
-                "color": "#10175E"
+                "biome": "minecraft:frozen_river",
+                "color": "#b2e7fc"
             },
             {
-                "biome": "minecraft:stony_peaks",
-                "color": "#939393"
+                "biome": "minecraft:frozen_ocean",
+                "color": "#4a8cf8"
+            },
+            {
+                "biome": "minecraft:snowy_taiga",
+                "color": "#546459"
+            },
+            {
+                "biome": "minecraft:river",
+                "color": "#68a3fc"
             },
             {
                 "biome": "minecraft:taiga",
-                "color": "#338553"
+                "color": "#28cd43"
+            },
+            {
+                "biome": "minecraft:forest",
+                "color": "#11d922"
+            },
+            {
+                "biome": "minecraft:windswept_hills",
+                "color": "#09824c"
+            },
+            {
+                "biome": "minecraft:windswept_forest",
+                "color": "#42d794"
+            },
+            {
+                "biome": "minecraft:windswept_gravelly_hills",
+                "color": "#556a61"
+            },
+            {
+                "biome": "minecraft:grove",
+                "color": "#234838"
             }
         ]
     }
