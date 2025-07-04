@@ -8,7 +8,7 @@
         "biomes": [
             {
                 "biome": "minecraft:ocean",
-                "color": "#ffd400"
+                "color": "#006eff"
             },
             {
                 "biome": "minecraft:plains",
@@ -63,6 +63,10 @@
                 "color": "#11d922"
             },
             {
+                "biome": "minecraft:flower_forest",
+                "color": "#e7d5ed"
+            },
+            {
                 "biome": "minecraft:windswept_hills",
                 "color": "#09824c"
             },
@@ -77,6 +81,18 @@
             {
                 "biome": "minecraft:grove",
                 "color": "#234838"
+            },
+            {
+                "biome": "minecraft:frozen_peaks",
+                "color": "#58c4e2"
+            },
+            {
+                "biome": "minecraft:snowy_slopes",
+                "color": "#9dc4cf"
+            },
+            {
+                "biome": "minecraft:jagged_peaks",
+                "color": "#7a8a8e"
             }
         ]
     }
