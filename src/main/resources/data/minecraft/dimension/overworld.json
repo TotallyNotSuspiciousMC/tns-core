@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:overworld",
+    "generator": {
+        "type": "novoatlas:image_map",
+        "map_info": "tns-core:overworld",
+        "settings": "minecraft:overworld",
+        "underground_density_function": "novoatlas:caves",
+        "biome_source": {
+            "type": "novoatlas:color_map",
+            "map_info": "tns-core:overworld",
+            "default_biome": "minecraft:the_void"
+        }
+    }
+}
