@@ -47,6 +47,10 @@
                 "color": "#4a8cf8"
             },
             {
+                "biome": "minecraft:deep_frozen_ocean",
+                "color": "#4d7bc8"
+            },
+            {
                 "biome": "minecraft:snowy_taiga",
                 "color": "#546459"
             },
@@ -101,6 +105,110 @@
             {
                 "biome": "minecraft:pale_garden",
                 "color": "#9da095"
+            },
+            {
+                "biome": "minecraft:meadow",
+                "color": "#c8fc83"
+            },
+            {
+                "biome": "minecraft:cherry_grove",
+                "color": "#fcc4e2"
+            },
+            {
+                "biome": "minecraft:cold_ocean",
+                "color": "#0e3bdf"
+            },
+            {
+                "biome": "minecraft:deep_cold_ocean",
+                "color": "#0d31b2"
+            },
+            {
+                "biome": "minecraft:taiga",
+                "color": "#137108"
+            },
+            {
+                "biome": "minecraft:old_growth_spruce_taiga",
+                "color": "#1c4707"
+            },
+            {
+                "biome": "minecraft:old_growth_pine_taiga",
+                "color": "#473307"
+            },
+            {
+                "biome": "minecraft:birch_forest",
+                "color": "#81d993"
+            },
+            {
+                "biome": "minecraft:old_growth_birch_forest",
+                "color": "#41aa56"
+            },
+            {
+                "biome": "minecraft:savanna",
+                "color": "#b9e624"
+            },
+            {
+                "biome": "minecraft:savanna_plateau",
+                "color": "#9ba213"
+            },
+            {
+                "biome": "minecraft:windswept_savanna",
+                "color": "#a28513"
+            },
+            {
+                "biome": "minecraft:desert",
+                "color": "#ffe84f"
+            },
+            {
+                "biome": "minecraft:mangrove_swamp",
+                "color": "#4c763c"
+            },
+            {
+                "biome": "minecraft:swamp",
+                "color": "#276228"
+            },
+            {
+                "biome": "minecraft:badlands",
+                "color": "#d0411a"
+            },
+            {
+                "biome": "minecraft:eroded_badlands",
+                "color": "#e56a2d"
+            },
+            {
+                "biome": "minecraft:wooded_badlands",
+                "color": "#733719"
+            },
+            {
+                "biome": "minecraft:stony_peaks",
+                "color": "#c3c3c3"
+            },
+            {
+                "biome": "minecraft:mushroom_fields",
+                "color": "#f8177c"
+            },
+            {
+                "biome": "minecraft:jungle",
+                "color": "#3ebb1e"
+            },
+            {
+                "biome": "minecraft:sparse_jungle",
+                "color": "#53ea45"
+            },
+            {
+                "biome": "minecraft:bamboo_jungle",
+                "color": "#9ce12c"
+            },
+            {
+                "biome": "minecraft:warm_ocean",
+                "color": "#3bccf4"
+            },
+            {
+                "biome": "minecraft:lukewarm_ocean",
+                "color": "#15b4d3"
+            },
+            {
+                "biome": "minecraft:deep_lukewarm_ocean",
+                "color": "#0a8baf"
             }
         ]
     }
