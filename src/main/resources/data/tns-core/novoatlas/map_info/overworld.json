@@ -93,6 +93,14 @@
             {
                 "biome": "minecraft:jagged_peaks",
                 "color": "#7a8a8e"
+            },
+            {
+                "biome": "minecraft:dark_forest",
+                "color": "#396322"
+            },
+            {
+                "biome": "minecraft:pale_garden",
+                "color": "#9da095"
             }
         ]
     }
