@@ -12,18 +12,15 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.Objects;
-import java.util.Set;
 
 public final class NationsManager {
-    private static final String NATIONS_ONBOARDED_TAG = "nations_onboarded";
     private static final RegistryKey<Dialog> WELCOME_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("welcome"));
     private static final RegistryKey<Dialog> JOIN_NATION_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("join_nation"));
     private static final RegistryKey<Dialog> CONFIRM_NATIONLESS_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("confirm_nationless"));
 
     public static void initialize() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-            Set<String> tags = handler.getPlayer().getCommandTags();
-            if (!tags.contains(NATIONS_ONBOARDED_TAG)) {
+            if (!PlayerNationComponent.get(handler.getPlayer()).isOnboarded()) {
                 openDialog(handler.getPlayer(), WELCOME_DIALOG);
                 TNSCore.LOGGER.info("Onboarding {} to nations", handler.getPlayer().getName());
             }
@@ -44,7 +41,6 @@ public final class NationsManager {
             openDialog(player, CONFIRM_NATIONLESS_DIALOG);
         } else if (PlayerNationComponent.get(player).tryJoinNation(payload.nation())) {
             TNSCore.LOGGER.info("Player {} joined nation {}", player.getName(), payload.nation());
-            player.getCommandTags().add(NATIONS_ONBOARDED_TAG);
         } else {
             TNSCore.LOGGER.info(
                     "Player {} tried to join the nation {}, but it has been too long since they first joined a nation.",
@@ -52,11 +48,7 @@ public final class NationsManager {
                     payload.nation()
             );
 
-            player.sendMessage(
-                    Text.literal("Sorry, it has been too long since you first joined your nation to freely change nations now. Please make a ticket on Discord requesting to change nations. Include in your ticket which nation you want to switch to or leave, the nation you are currently in, and ")
-                            .formatted(Formatting.RED)
-                            .append(Text.literal("explain why you want to change nations.").formatted(Formatting.ITALIC))
-            );
+            player.sendMessage(Text.translatable("tnscore.nations.join.deny.tooOld").formatted(Formatting.RED));
         }
     }
 

@@ -38,7 +38,8 @@
 		"java": ">=21",
 		"fabric-api": "*",
 		"novoatlas": "*",
-		"cardinal-components-base": "*"
+		"cardinal-components-base": "*",
+		"fabric-permissions-api-v0": "*"
 	},
 	"suggests": {
 	},

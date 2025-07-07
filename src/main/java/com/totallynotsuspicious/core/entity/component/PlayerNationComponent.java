@@ -17,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 public class PlayerNationComponent implements Component {
     private static final String TIME_JOINED_NATION_KEY = "time_joined_first_nation";
     private static final String NATION_KEY = "nation";
+    private static final String ONBOARDED_KEY = "onboarded";
 
     private final PlayerEntity player;
 
@@ -25,8 +26,24 @@ public class PlayerNationComponent implements Component {
 
     private Nation nation = Nation.NATIONLESS;
 
+    private boolean onboarded = false;
+
     public PlayerNationComponent(PlayerEntity player) {
         this.player = player;
+    }
+
+    public void reset() {
+        this.timeJoinedFirstNation = null;
+        this.nation = Nation.NATIONLESS;
+        this.onboarded = false;
+    }
+
+    public void joinNation(Nation nation) {
+        if (!this.onboarded || this.timeJoinedFirstNation == null) {
+            this.timeJoinedFirstNation = Instant.now();
+        }
+        this.onboarded = true;
+        this.nation = nation;
     }
 
     public boolean tryJoinNation(Nation nation) {
@@ -43,11 +60,7 @@ public class PlayerNationComponent implements Component {
             return false;
         }
 
-        this.nation = nation;
-
-        if (this.timeJoinedFirstNation == null && this.nation != Nation.NATIONLESS) {
-            this.timeJoinedFirstNation = now;
-        }
+        this.joinNation(nation);
 
         serverPlayer.sendMessage(nation.getJoinMessage());
         serverPlayer.sendMessage(
@@ -64,12 +77,14 @@ public class PlayerNationComponent implements Component {
     public void readData(ReadView readView) {
         this.timeJoinedFirstNation = readView.read(TIME_JOINED_NATION_KEY, TNSCodecs.INSTANT_CODEC).orElse(null);
         this.nation = readView.read(NATION_KEY, Nation.CODEC).orElse(Nation.NATIONLESS);
+        this.onboarded = readView.getBoolean(ONBOARDED_KEY, false);
     }
 
     @Override
     public void writeData(WriteView writeView) {
         writeView.putNullable(TIME_JOINED_NATION_KEY, TNSCodecs.INSTANT_CODEC, this.timeJoinedFirstNation);
         writeView.put(NATION_KEY, Nation.CODEC, this.nation);
+        writeView.putBoolean(ONBOARDED_KEY, this.onboarded);
     }
 
     private boolean canJoinNationNow(Instant now) {
@@ -81,5 +96,9 @@ public class PlayerNationComponent implements Component {
 
     public static PlayerNationComponent get(PlayerEntity player) {
         return TNSCoreEntityComponents.PLAYER_NATION.get(player);
+    }
+
+    public boolean isOnboarded() {
+        return onboarded;
     }
 }

@@ -14,7 +14,7 @@ public enum Nation implements StringIdentifiable {
     VAYUNE("vayune", Text.literal("Vayune").formatted(Formatting.AQUA, Formatting.BOLD)),
     NATIONLESS("nationless", Text.literal("Nationless").formatted(Formatting.DARK_GRAY, Formatting.ITALIC));
 
-    public static final Codec<Nation> CODEC = StringIdentifiable.createCodec(Nation::values);
+    public static final EnumCodec<Nation> CODEC = StringIdentifiable.createCodec(Nation::values);
 
     private final String name;
 
