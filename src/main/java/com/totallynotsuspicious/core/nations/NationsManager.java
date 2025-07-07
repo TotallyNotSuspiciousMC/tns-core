@@ -1,6 +1,7 @@
 package com.totallynotsuspicious.core.nations;
 
 import com.totallynotsuspicious.core.TNSCore;
+import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.dialog.type.Dialog;
 import net.minecraft.registry.RegistryKey;
@@ -41,16 +42,20 @@ public final class NationsManager {
     private static void joinNation(ServerPlayerEntity player, JoinNationPayload payload) {
         if (payload.nation() == Nation.NATIONLESS && !payload.confirmed()) {
             openDialog(player, CONFIRM_NATIONLESS_DIALOG);
-        } else {
+        } else if (PlayerNationComponent.get(player).tryJoinNation(payload.nation())) {
             TNSCore.LOGGER.info("Player {} joined nation {}", player.getName(), payload.nation());
             player.getCommandTags().add(NATIONS_ONBOARDED_TAG);
+        } else {
+            TNSCore.LOGGER.info(
+                    "Player {} tried to join the nation {}, but it has been too long since they first joined a nation.",
+                    player.getName(),
+                    payload.nation()
+            );
 
-            player.sendMessage(payload.nation().getJoinMessage());
             player.sendMessage(
-                    Text.literal("You can request to change your nation at any time by pressing ")
-                            .formatted(Formatting.GRAY, Formatting.ITALIC)
-                            .append(Text.keybind("key.quickActions"))
-                            .append(Text.literal("."))
+                    Text.literal("Sorry, it has been too long since you first joined your nation to freely change nations now. Please make a ticket on Discord requesting to change nations. Include in your ticket which nation you want to switch to or leave, the nation you are currently in, and ")
+                            .formatted(Formatting.RED)
+                            .append(Text.literal("explain why you want to change nations.").formatted(Formatting.ITALIC))
             );
         }
     }
