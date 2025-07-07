@@ -1,0 +1,69 @@
+{
+    "type": "minecraft:multi_action",
+    "title": "TNS Nations Onboarding",
+    "body": [
+        {
+            "type": "minecraft:plain_message",
+            "contents": [
+                "Welcome to Season 13 of TNS! This season is coming with some changes to the normal SMP, which this guide will walk you through.\n\nThe biggest change is that we are debuting a new system called ",
+                {
+                    "text": "Nations.",
+                    "bold": true,
+                    "color": "yellow"
+                },
+                " This is a system that allows you to team up with other players in an organized way. You can still make your own base, gather your own resources, and do what you want, but you will be encouraged to spend more time interacting with your neighbours and the server as a whole.\n\n",
+                "There are four nations: \n",
+                {
+                    "text": "The Empire of Fidelis, ",
+                    "bold": true,
+                    "color": "red"
+                },
+                {
+                    "text": "Pandora, ",
+                    "bold": true,
+                    "color": "gold"
+                },
+                {
+                    "text": "Taure Aranónë,",
+                    "bold": true,
+                    "color": "green"
+                },
+                " and ",
+                {
+                    "text": "Vayune.",
+                    "bold": true,
+                    "color": "aqua"
+                },
+                " Each nation lives in an exclusive set of biomes, and has its own themes, personalities, and priorities. Joining a nation is highly encouraged, as they will be given the power to enforce their territorial claims against players from other nations.\n\nHowever, you can be ",
+                {
+                    "text": "Nationless. ",
+                    "bold": true,
+                    "color": "gray"
+                },
+                "Being Nationless will relegate you to a frozen wasteland in The South. You will not have the right to build anywhere except in this neutral zone, but you will be free to go it completely on your own, without anyone telling you what to do.\n\nYou can read more about nations, and the other changes this season, here: ",
+                {
+                    "text": "<ADD LINK HERE>",
+                    "underlined": true,
+                    "color": "blue",
+                    "click_event": {
+                        "action": "open_url",
+                        "url": "https://link.com"
+                    }
+                }
+            ]
+        }
+    ],
+    "inputs": [],
+    "can_close_with_escape": true,
+    "after_action": "close",
+    "actions": [
+        {
+            "label": "Join a Nation",
+            "action": {
+                "type": "custom",
+                "id": "tns-core:join_nation",
+                "payload": ""
+            }
+        }
+    ]
+}
