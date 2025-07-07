@@ -21,7 +21,7 @@
         "label": "I am sure",
         "action": {
             "type": "custom",
-            "id": "tns-core:join_nation",
+            "id": "tns-core:join_nation_form",
             "payload": {
                 "nation": "nationless",
                 "confirmed": true

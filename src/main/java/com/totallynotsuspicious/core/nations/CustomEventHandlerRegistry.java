@@ -1,6 +1,5 @@
 package com.totallynotsuspicious.core.nations;
 
-import com.totallynotsuspicious.core.TNSCore;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.util.Identifier;

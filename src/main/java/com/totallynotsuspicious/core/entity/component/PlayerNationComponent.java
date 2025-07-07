@@ -63,7 +63,10 @@ public class PlayerNationComponent implements Component {
         this.joinNation(nation);
 
         serverPlayer.sendMessage(nation.getJoinMessage());
-        serverPlayer.sendMessage(Text.translatable("tnscore.nations.join.accepted.change", Text.keybind("key.quickActions")));
+        serverPlayer.sendMessage(
+                Text.translatable("tnscore.nations.join.accepted.change", Text.keybind("key.quickActions"))
+                        .formatted(Formatting.GRAY)
+        );
 
         return true;
     }
