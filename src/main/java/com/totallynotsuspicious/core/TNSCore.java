@@ -1,12 +1,9 @@
 package com.totallynotsuspicious.core;
 
-import com.totallynotsuspicious.core.nations.CustomDialogReceivedCallback;
 import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
-import com.totallynotsuspicious.core.nations.NationsDialogManager;
+import com.totallynotsuspicious.core.nations.NationsManager;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.networking.v1.FabricServerConfigurationNetworkHandler;
-import net.minecraft.server.network.ServerCommonNetworkHandler;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +15,7 @@ public class TNSCore implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		NationsDialogManager.initialize();
+		NationsManager.initialize();
 		CustomEventHandlerRegistry.initialize();
 	}
 

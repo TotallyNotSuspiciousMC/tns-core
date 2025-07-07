@@ -8,7 +8,16 @@
             "type": "minecraft:plain_message",
             "contents": [
                 "Select one of the below options to join a nation. You can change your nation at any time, no questions asked, for up to seven days. After that, you will need to submit a ticket on Discord explaining your reasoning for the change.",
-                "\n\nUnsure which nation to join? Try taking the personality quiz to see which might be your best match!"
+                "\n\nUnsure which nation to join? Try taking the personality quiz to see which might be your best match!\n\nMore information about nations can be found at the following link: ",
+                {
+                    "text": "<ADD LINK HERE>",
+                    "underlined": true,
+                    "color": "blue",
+                    "click_event": {
+                        "action": "open_url",
+                        "url": "https://link.com"
+                    }
+                }
             ]
         }
     ],

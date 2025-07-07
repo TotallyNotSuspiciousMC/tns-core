@@ -6,6 +6,5 @@ import org.ladysnake.cca.api.v3.entity.EntityComponentInitializer;
 public final class TNSCoreEntityComponents implements EntityComponentInitializer {
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-
     }
 }

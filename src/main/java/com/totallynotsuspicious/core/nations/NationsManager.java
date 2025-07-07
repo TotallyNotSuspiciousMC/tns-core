@@ -7,11 +7,13 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.Objects;
 import java.util.Set;
 
-public final class NationsDialogManager {
+public final class NationsManager {
     private static final String NATIONS_ONBOARDED_TAG = "nations_onboarded";
     private static final RegistryKey<Dialog> WELCOME_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("welcome"));
     private static final RegistryKey<Dialog> JOIN_NATION_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("join_nation"));
@@ -42,6 +44,14 @@ public final class NationsDialogManager {
         } else {
             TNSCore.LOGGER.info("Player {} joined nation {}", player.getName(), payload.nation());
             player.getCommandTags().add(NATIONS_ONBOARDED_TAG);
+
+            player.sendMessage(payload.nation().getJoinMessage());
+            player.sendMessage(
+                    Text.literal("You can request to change your nation at any time by pressing ")
+                            .formatted(Formatting.GRAY, Formatting.ITALIC)
+                            .append(Text.keybind("key.quickActions"))
+                            .append(Text.literal("."))
+            );
         }
     }
 
@@ -54,7 +64,7 @@ public final class NationsDialogManager {
         player.openDialog(dialog);
     }
 
-    private NationsDialogManager() {
+    private NationsManager() {
 
     }
 }
