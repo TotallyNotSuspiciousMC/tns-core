@@ -8,6 +8,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerCommonNetworkHandler;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 
 import java.util.Set;
@@ -23,6 +24,10 @@ public final class NationsDialogManager {
             if (!tags.contains(NATIONS_ONBOARDED_TAG)) {
                 onNewPlayerJoin(handler, server);
             }
+        });
+
+        CustomDialogReceivedCallback.EVENT.register((handler, id, payload) -> {
+            TNSCore.LOGGER.info("Received custom event id {} with payload {}", id, payload);
         });
     }
 

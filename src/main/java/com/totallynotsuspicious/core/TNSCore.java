@@ -3,6 +3,8 @@ package com.totallynotsuspicious.core;
 import com.totallynotsuspicious.core.nations.NationsDialogManager;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.networking.v1.FabricServerConfigurationNetworkHandler;
+import net.minecraft.server.network.ServerCommonNetworkHandler;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
