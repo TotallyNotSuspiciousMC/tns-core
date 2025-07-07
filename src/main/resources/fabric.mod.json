@@ -39,7 +39,8 @@
 		"fabric-api": "*",
 		"novoatlas": "*",
 		"cardinal-components-base": "*",
-		"fabric-permissions-api-v0": "*"
+		"fabric-permissions-api-v0": "*",
+		"placeholder-api": "*"
 	},
 	"suggests": {
 	},

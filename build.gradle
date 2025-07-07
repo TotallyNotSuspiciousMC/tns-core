@@ -65,6 +65,8 @@ dependencies {
 
 	modImplementation include("xyz.nucleoid:server-translations-api:${project.translation_api_version}")
 
+	modImplementation("eu.pb4:placeholder-api:${project.placeholder_api_version}")
+
 	// TODO: repalce with modrinth maven when approved
 	modImplementation "curse.maven:novoatlas-1297254:6711321"
 }

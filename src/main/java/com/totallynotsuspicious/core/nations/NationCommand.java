@@ -12,6 +12,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import org.apache.logging.log4j.core.jmx.Server;
 
 
 import java.util.Arrays;
@@ -21,6 +22,10 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public final class NationCommand {
+    private static boolean hasManagePermission(ServerCommandSource src) {
+        return src.hasPermissionLevel(3) || Permissions.check(src, "tnscore.nations.manage");
+    }
+
     public static void registerCommand(
             CommandDispatcher<ServerCommandSource> dispatcher,
             CommandRegistryAccess registryAccess,
@@ -30,9 +35,9 @@ public final class NationCommand {
         final String nationArg = "nation";
 
         LiteralArgumentBuilder<ServerCommandSource> nation = literal("nation")
-                .requires(src -> src.hasPermissionLevel(3) || Permissions.check(src, "tnscore.nations.manage"))
                 .then(
                         literal("reset")
+                                .requires(NationCommand::hasManagePermission)
                                 .then(
                                         argument(playerArg, EntityArgumentType.player())
                                                 .executes(ctx -> executeReset(
@@ -43,6 +48,7 @@ public final class NationCommand {
                 )
                 .then(
                         literal("set")
+                                .requires(NationCommand::hasManagePermission)
                                 .then(
                                         argument(playerArg, EntityArgumentType.player())
                                                 .then(nationArgument(nationArg).executes(ctx -> executeSet(

@@ -1,25 +1,27 @@
 package com.totallynotsuspicious.core.nations;
 
+import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
 
 public enum Nation implements StringIdentifiable {
-    FIDELIS("fidelis", Text.literal("Fidelis").formatted(Formatting.RED, Formatting.BOLD)),
-    PANDORA("pandora", Text.literal("Pandora").formatted(Formatting.GOLD, Formatting.BOLD)),
-    TAURE_ARANOE("taure_aranie", Text.literal("Taure Aranië").formatted(Formatting.GREEN, Formatting.BOLD)),
-    VAYUNE("vayune", Text.literal("Vayune").formatted(Formatting.AQUA, Formatting.BOLD)),
-    NATIONLESS("nationless", Text.literal("Nationless").formatted(Formatting.DARK_GRAY, Formatting.ITALIC));
+
+    NATIONLESS("nationless", NationData.NATIONLESS),
+    FIDELIS("fidelis", NationData.FIDELIS),
+    PANDORA("pandora", NationData.PANDORA),
+    TAURE_ARANOE("taure_aranie", NationData.TAURE_ARANIE),
+    VAYUNE("vayune", NationData.VAYUNE);
 
     public static final EnumCodec<Nation> CODEC = StringIdentifiable.createCodec(Nation::values);
 
     private final String name;
 
-    private final Text title;
+    private final NationData data;
 
-    Nation(String name, Text title) {
+    Nation(String name, NationData data) {
         this.name = name;
-        this.title = title;
+        this.data = data;
     }
 
     @Override
@@ -27,8 +29,13 @@ public enum Nation implements StringIdentifiable {
         return this.name;
     }
 
+    @Deprecated
     public Text getTitle() {
-        return title;
+        return this.data.title();
+    }
+
+    public NationData getData() {
+        return data;
     }
 
     public Text getJoinMessage() {

@@ -99,4 +99,8 @@ public class PlayerNationComponent implements Component {
     public boolean isOnboarded() {
         return onboarded;
     }
+
+    public Nation getNation() {
+        return nation;
+    }
 }
