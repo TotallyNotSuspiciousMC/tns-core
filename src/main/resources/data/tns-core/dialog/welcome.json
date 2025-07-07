@@ -1,6 +1,8 @@
 {
     "type": "minecraft:multi_action",
     "title": "TNS Nations Onboarding",
+    "can_close_with_escape": false,
+    "after_action": "close",
     "body": [
         {
             "type": "minecraft:plain_message",
@@ -34,7 +36,7 @@
                     "bold": true,
                     "color": "aqua"
                 },
-                " Each nation lives in an exclusive set of biomes, and has its own themes, personalities, and priorities. Joining a nation is highly encouraged, as they will be given the power to enforce their territorial claims against players from other nations.\n\nHowever, you can be ",
+                " Each nation lives in an exclusive set of biomes, and has its own themes, personalities, and priorities. Joining a nation is highly encouraged, as they will be given the power to enforce their territorial claims against players from other nations (including the right to build shops in their nation's capital).\n\nHowever, you can be ",
                 {
                     "text": "Nationless. ",
                     "bold": true,
@@ -54,8 +56,6 @@
         }
     ],
     "inputs": [],
-    "can_close_with_escape": false,
-    "after_action": "close",
     "actions": [
         {
             "label": "Join a Nation",

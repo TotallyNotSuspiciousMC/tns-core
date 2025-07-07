@@ -1,0 +1,38 @@
+{
+    "type": "minecraft:confirmation",
+    "title": "Are you sure?",
+    "can_close_with_escape": false,
+    "after_action": "close",
+    "body": [
+        {
+            "type": "minecraft:plain_message",
+            "contents": [
+                "Are you sure that you want to be ",
+                {
+                    "text": "Nationless? ",
+                    "color": "gray",
+                    "bold": true
+                },
+                "Remember that Nationless players have very limited build rights, and cannot participate in any shopping district."
+            ]
+        }
+    ],
+    "yes": {
+        "label": "I am sure",
+        "action": {
+            "type": "custom",
+            "id": "tns-core:join_nation",
+            "payload": {
+                "nation": "nationless",
+                "confirmed": true
+            }
+        }
+    },
+    "no": {
+        "label": "Let me go back",
+        "action": {
+            "type": "show_dialog",
+            "dialog": "tns-core:join_nation"
+        }
+    }
+}

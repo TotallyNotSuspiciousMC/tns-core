@@ -1,5 +1,7 @@
 package com.totallynotsuspicious.core;
 
+import com.totallynotsuspicious.core.nations.CustomDialogReceivedCallback;
+import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
 import com.totallynotsuspicious.core.nations.NationsDialogManager;
 import net.fabricmc.api.ModInitializer;
 
@@ -17,6 +19,7 @@ public class TNSCore implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		NationsDialogManager.initialize();
+		CustomEventHandlerRegistry.initialize();
 	}
 
 	public static Identifier id(String path) {
