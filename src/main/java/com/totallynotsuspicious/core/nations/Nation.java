@@ -1,8 +1,5 @@
 package com.totallynotsuspicious.core.nations;
 
-import com.mojang.serialization.Codec;
-import net.minecraft.text.KeybindTextContent;
-import net.minecraft.text.KeybindTranslations;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
@@ -36,15 +33,11 @@ public enum Nation implements StringIdentifiable {
 
     public Text getJoinMessage() {
         if (this == NATIONLESS) {
-            return Text.literal("You are now ")
-                    .formatted(Formatting.GRAY)
-                    .append(this.getTitle())
-                    .append(Text.literal("!"));
+            return Text.translatable("tnscore.nations.join.accepted.nationless")
+                    .formatted(Formatting.GRAY);
         } else {
-            return Text.literal("You have joined ")
-                    .formatted(Formatting.GRAY)
-                    .append(this.getTitle())
-                    .append(Text.literal("!"));
+            return Text.translatable("tnscore.nations.join.accepted.normal", this.getTitle())
+                    .formatted(Formatting.GRAY);
         }
     }
 }

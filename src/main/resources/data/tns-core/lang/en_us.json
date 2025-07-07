@@ -1,5 +1,8 @@
 {
     "tnscore.commands.nation.reset.success": "Reset nations for %s",
     "tnscore.commands.nation.set.success": "Set nation for %s to %s",
-    "tnscore.nations.join.deny.tooOld": "Sorry, it has been too long since you first joined the server to freely change nations now. Please make a ticket on Discord requesting to change nations. Include in your ticket which nation you want to switch to or leave, the nation you are currently in, and explain why you want to change nations."
+    "tnscore.nations.join.deny.tooOld": "Sorry, it has been too long since you first joined the server to freely change nations now. Please make a ticket on Discord requesting to change nations. Include in your ticket which nation you want to switch to or leave, the nation you are currently in, and explain why you want to change nations.",
+    "tnscore.nations.join.accepted.change": "For the next week, you can request to change your nation at any time by pressing %s. After this time, you must make a ticket on Discord to change nations.",
+    "tnscore.nations.join.accepted.normal": "You have joined %s!",
+    "tnscore.nations.join.accepted.nationless": "You are now Nationless!"
 }

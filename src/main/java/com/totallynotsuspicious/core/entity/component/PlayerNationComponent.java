@@ -63,12 +63,7 @@ public class PlayerNationComponent implements Component {
         this.joinNation(nation);
 
         serverPlayer.sendMessage(nation.getJoinMessage());
-        serverPlayer.sendMessage(
-                Text.literal("For the next week, you can request to change your nation at any time by pressing ")
-                        .formatted(Formatting.GRAY, Formatting.ITALIC)
-                        .append(Text.keybind("key.quickActions"))
-                        .append(Text.literal(". After this time, you must make a ticket on Discord to change nations."))
-        );
+        serverPlayer.sendMessage(Text.translatable("tnscore.nations.join.accepted.change", Text.keybind("key.quickActions")));
 
         return true;
     }
