@@ -1,0 +1,72 @@
+{
+    "type": "minecraft:multi_action",
+    "title": "Join a Nation",
+    "body": [
+        {
+            "type": "minecraft:plain_message",
+            "contents": [
+                "Select one of the below options to join a nation. You can change your nation at any time, no questions asked, for up to seven days. After that, you will need to submit a ticket on Discord explaining your reasoning for the change.",
+                "\n\nUnsure which nation to join? Try taking the personality quiz to see which might be your best match!"
+            ]
+        }
+    ],
+    "inputs": [],
+    "can_close_with_escape": false,
+    "after_action": "close",
+    "actions": [
+        {
+            "label": [
+                {
+                    "text": "Join Fidelis",
+                    "color": "red",
+                    "bold": true
+                }
+            ]
+        },
+        {
+            "label": [
+                {
+                    "text": "Join Pandora",
+                    "color": "gold",
+                    "bold": true
+                }
+            ]
+        },
+        {
+            "label": [
+                {
+                    "text": "Join Taure Aranónë",
+                    "color": "green",
+                    "bold": true
+                }
+            ]
+        },
+        {
+            "label": [
+                {
+                    "text": "Join Vayune",
+                    "color": "aqua",
+                    "bold": true
+                }
+            ]
+        },
+        {
+            "label": [
+                {
+                    "text": "Personality Quiz",
+                    "color": "white",
+                    "bold": true
+                }
+            ]
+        },
+        {
+            "label": [
+                {
+                    "text": "Become Nationless",
+                    "color": "gray",
+                    "italic": true
+                }
+            ]
+        }
+    ]
+}

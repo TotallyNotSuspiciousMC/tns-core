@@ -1,7 +1,9 @@
 package com.totallynotsuspicious.core;
 
+import com.totallynotsuspicious.core.nations.NationsDialogManager;
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +14,10 @@ public class TNSCore implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		NationsDialogManager.initialize();
+	}
 
+	public static Identifier id(String path) {
+		return Identifier.of(MOD_ID, path);
 	}
 }

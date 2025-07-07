@@ -54,15 +54,14 @@
         }
     ],
     "inputs": [],
-    "can_close_with_escape": true,
+    "can_close_with_escape": false,
     "after_action": "close",
     "actions": [
         {
             "label": "Join a Nation",
             "action": {
-                "type": "custom",
-                "id": "tns-core:join_nation",
-                "payload": ""
+                "type": "show_dialog",
+                "dialog": "tns-core:join_nation"
             }
         }
     ]
