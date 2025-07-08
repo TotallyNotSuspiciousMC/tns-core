@@ -6,7 +6,6 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import com.mojang.brigadier.exceptions.CommandExceptionType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
@@ -135,12 +134,22 @@ public final class NationCommand {
     }
 
     private static int executeQueryClaim(ServerCommandSource source, BlockPos pos) {
+        Chunk chunk = source.getWorld().getChunk(pos);
+        NationClaimChunkComponent component = NationClaimChunkComponent.get(chunk);
+
+        Nation claimed = component.getClaimedNation();
+
+        if (claimed.isNotNationless()) {
+            source.sendFeedback(() -> Text.translatable("tnscore.commands.nation.claim.query.claimed", claimed.getTitle()), false);
+        } else {
+            source.sendFeedback(() -> Text.translatable("tnscore.commands.nation.claim.query.nationless"), false);
+        }
+
         return Command.SINGLE_SUCCESS;
     }
 
     private static int executeClaim(ServerCommandSource source, BlockPos pos, Nation nation, boolean force) throws CommandSyntaxException {
         Chunk chunk = source.getWorld().getChunk(pos);
-
         NationClaimChunkComponent component = NationClaimChunkComponent.get(chunk);
 
         boolean success;
@@ -154,7 +163,7 @@ public final class NationCommand {
         if (success) {
             source.sendFeedback(() -> Text.translatable("tnscore.commands.nation.claim.success", nation.getTitle()), true);
         } else {
-            throw UNKNOWN_PROPERTY_EXCEPTION.create(nation, component.getClaimedNation());
+            throw UNKNOWN_PROPERTY_EXCEPTION.create(nation.getTitle(), component.getClaimedNation().getTitle());
         }
 
         return Command.SINGLE_SUCCESS;
@@ -181,9 +190,9 @@ public final class NationCommand {
     private static int executeGet(ServerCommandSource source, ServerPlayerEntity player) {
         Nation nation = PlayerNationComponent.get(player).getNation();
 
-        if (nation == Nation.NATIONLESS) {
+        if (nation.isNotNationless()) {
             source.sendFeedback(
-                    () -> Text.translatable("tnscore.commands.nation.get", player.getName(), nation),
+                    () -> Text.translatable("tnscore.commands.nation.get", player.getName(), nation.getTitle()),
                     false
             );
         } else {

@@ -41,6 +41,14 @@ public enum Nation implements StringIdentifiable {
         return data;
     }
 
+    public boolean isNationless() {
+        return this == NATIONLESS;
+    }
+
+    public boolean isNotNationless() {
+        return this != NATIONLESS;
+    }
+
     public Text getJoinMessage() {
         if (this == NATIONLESS) {
             return Text.translatable("tnscore.nations.join.accepted.nationless")

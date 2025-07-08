@@ -31,7 +31,7 @@ public class NationClaimChunkComponent implements Component {
     }
 
     public boolean claim(Nation nation) {
-        if (this.claimedNation == Nation.NATIONLESS) {
+        if (this.claimedNation.isNationless()) {
             this.claimedNation = nation;
             return true;
         }
