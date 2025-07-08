@@ -2,14 +2,24 @@ package com.totallynotsuspicious.core.nations;
 
 import com.totallynotsuspicious.core.TNSCore;
 import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
+import com.totallynotsuspicious.core.event.PlaceBlockCallback;
+import com.totallynotsuspicious.core.world.NationClaimChunkComponent;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.dialog.type.Dialog;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import java.util.Objects;
 
@@ -34,6 +44,28 @@ public final class NationsManager {
                 openDialog(handler.getPlayer(), JOIN_NATION_DIALOG);
             }
         });
+
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
+            if (!world.isClient()) {
+                checkClaimedArea(world, pos, player);
+            }
+        });
+
+        PlaceBlockCallback.EVENT.register(context -> {
+            if (!context.getWorld().isClient()) {
+                checkClaimedArea(context.getWorld(), context.getBlockPos(), context.getPlayer());
+            }
+        });
+    }
+
+    private static void checkClaimedArea(World world, BlockPos pos, PlayerEntity player) {
+        Chunk chunk = world.getChunk(pos);
+        NationClaimChunkComponent claim = NationClaimChunkComponent.get(chunk);
+        PlayerNationComponent nation = PlayerNationComponent.get(player);
+
+        if (!claim.isBuildingAllowedBy(nation.getNation())) {
+            player.sendMessage(Text.translatable("tnscore.nations.claimedChunk").formatted(Formatting.RED), false);
+        }
     }
 
     private static void joinNation(ServerPlayerEntity player, JoinNationPayload payload) {

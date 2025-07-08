@@ -47,7 +47,7 @@ public class NationClaimChunkComponent implements Component {
         return claimedNation;
     }
 
-    public boolean canModify(Nation nation) {
+    public boolean isBuildingAllowedBy(Nation nation) {
         if (this.claimedNation == Nation.NATIONLESS) {
             return true;
         } else {

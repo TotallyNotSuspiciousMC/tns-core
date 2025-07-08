@@ -103,4 +103,14 @@ public class PlayerNationComponent implements Component {
     public Nation getNation() {
         return this.nation;
     }
+
+    @Override
+    public String toString() {
+        return "PlayerNationComponent{" +
+                "player=" + player +
+                ", timeJoinedFirstNation=" + timeJoinedFirstNation +
+                ", nation=" + nation +
+                ", onboarded=" + onboarded +
+                '}';
+    }
 }

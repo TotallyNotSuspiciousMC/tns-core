@@ -1,9 +1,9 @@
 package com.totallynotsuspicious.core;
 
+import com.totallynotsuspicious.core.compat.TNSCorePlaceholders;
 import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
 import com.totallynotsuspicious.core.nations.NationCommand;
 import com.totallynotsuspicious.core.nations.NationsManager;
-import com.totallynotsuspicious.core.compat.TNSCorePlaceholders;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.util.Identifier;
