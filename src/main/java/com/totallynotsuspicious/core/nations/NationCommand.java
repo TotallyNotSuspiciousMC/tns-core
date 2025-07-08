@@ -10,14 +10,11 @@ import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.command.TeleportCommand;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 
 import java.util.Arrays;
@@ -93,7 +90,7 @@ public final class NationCommand {
         ServerPlayerEntity player = source.getPlayerOrThrow();
         Nation nation = PlayerNationComponent.get(player).getNation();
 
-        Vec3d homePos = Vec3d.ofCenter(nation.getData().spawn());
+        Vec3d homePos = Vec3d.ofCenter(nation.getData().home());
         player.teleport(
                 source.getServer().getWorld(World.OVERWORLD),
                 homePos.x,

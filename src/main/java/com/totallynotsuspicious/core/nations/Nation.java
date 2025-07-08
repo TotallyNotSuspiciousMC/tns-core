@@ -1,9 +1,9 @@
 package com.totallynotsuspicious.core.nations;
 
-import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.math.BlockPos;
 
 public enum Nation implements StringIdentifiable {
 
@@ -29,9 +29,12 @@ public enum Nation implements StringIdentifiable {
         return this.name;
     }
 
-    @Deprecated
     public Text getTitle() {
         return this.data.title();
+    }
+
+    public BlockPos getHome() {
+        return this.data.home();
     }
 
     public NationData getData() {

@@ -23,6 +23,9 @@
 		],
 		"cardinal-components-entity": [
 			"com.totallynotsuspicious.core.entity.component.TNSCoreEntityComponents"
+		],
+		"cardinal-components-chunk": [
+			"com.totallynotsuspicious.core.world.TNSCoreChunkComponents"
 		]
 	},
 	"mixins": [
@@ -46,7 +49,8 @@
 	},
 	"custom": {
 		"cardinal-components": [
-			"tns-core:player_nation"
+			"tns-core:player_nation",
+			"tns-core:nation_claim"
 		]
 	}
 }

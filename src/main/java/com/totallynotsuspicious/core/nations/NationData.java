@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 public record NationData(
         Text title,
         Formatting color,
-        BlockPos spawn
+        BlockPos home
 ) {
     public static final NationData NATIONLESS = new NationData(
             Text.literal("Nationless").formatted(Formatting.DARK_GRAY, Formatting.ITALIC),
