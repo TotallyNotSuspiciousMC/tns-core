@@ -10,6 +10,7 @@ import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.entity.Entity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -31,6 +32,10 @@ public final class NationCommand {
 
     private static boolean hasHomePermission(ServerCommandSource src) {
         return src.hasPermissionLevel(2) || Permissions.check(src, "tnscore.nations.home");
+    }
+
+    private static boolean hasOtherHomePermission(ServerCommandSource src) {
+        return src.hasPermissionLevel(2) || Permissions.check(src, "tnscore.nations.home.other");
     }
 
     public static void registerCommand(
@@ -80,18 +85,27 @@ public final class NationCommand {
                 .then(
                         literal("home")
                                 .requires(NationCommand::hasHomePermission)
-                                .executes(ctx -> executeHome(ctx.getSource()))
+                                .then(nationArgument(nationArg)
+                                        .requires(NationCommand::hasOtherHomePermission)
+                                        .executes(ctx -> executeHome(
+                                                ctx.getSource(),
+                                                Nation.CODEC.byId(StringArgumentType.getString(ctx, nationArg), Nation.NATIONLESS)
+                                        ))
+                                )
+                                .executes(ctx -> executeHome(
+                                        ctx.getSource(),
+                                        PlayerNationComponent.get(ctx.getSource().getPlayerOrThrow()).getNation()
+                                ))
                 );
 
         dispatcher.register(nation);
     }
 
-    private static int executeHome(ServerCommandSource source) throws CommandSyntaxException {
-        ServerPlayerEntity player = source.getPlayerOrThrow();
-        Nation nation = PlayerNationComponent.get(player).getNation();
+    private static int executeHome(ServerCommandSource source, Nation nation) throws CommandSyntaxException {
+        Entity entity = source.getEntityOrThrow();
 
         Vec3d homePos = Vec3d.ofCenter(nation.getData().home());
-        player.teleport(
+        entity.teleport(
                 source.getServer().getWorld(World.OVERWORLD),
                 homePos.x,
                 homePos.y,

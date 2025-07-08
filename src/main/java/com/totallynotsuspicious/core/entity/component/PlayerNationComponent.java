@@ -101,6 +101,6 @@ public class PlayerNationComponent implements Component {
     }
 
     public Nation getNation() {
-        return nation;
+        return this.nation;
     }
 }
