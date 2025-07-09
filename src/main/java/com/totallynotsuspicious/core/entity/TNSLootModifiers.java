@@ -18,11 +18,10 @@ public final class TNSLootModifiers {
     public static void initialize() {
         LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
             if (key == ENTITIES_HUSK) {
-
                 tableBuilder.pool(
                         LootPool.builder()
                                 .with(ItemEntry.builder(Items.SAND)
-                                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 5.0f)))
+                                        .apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(1.0f, 3.0f)))
                                         .apply(EnchantedCountIncreaseLootFunction.builder(registries, UniformLootNumberProvider.create(0.0f, 1.0f)))
                                 )
                 );
