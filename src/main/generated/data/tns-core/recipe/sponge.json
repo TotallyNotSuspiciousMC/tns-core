@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "#minecraft:wool",
+    "F": "minecraft:pufferfish",
+    "N": "minecraft:nautilus_shell"
+  },
+  "pattern": [
+    "# #",
+    "NFN",
+    "# #"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:sponge"
+  }
+}

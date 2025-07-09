@@ -1,0 +1,9 @@
+// 1.21.7	-999999999-01-01T00:00:00	TNS Core/TNSRecipeGenerator
+a58e17db8164fb31a9178402d4fdb83282a85639 data/tns-core/advancement/recipes/building_blocks/quartz.json
+560b0e4d6f79b416a0e859d394598274eb16e3fe data/tns-core/advancement/recipes/building_blocks/red_sand.json
+2b7c6d22f14e6a993e5b855fcf6a16d8a13cc66d data/tns-core/advancement/recipes/building_blocks/sponge.json
+4fa1fbd070e4c8c368d930f7585986b3e61d669c data/tns-core/advancement/recipes/misc/glow_lichen.json
+3f4dea3d0a64dd848e74ba302e082d339031ea6b data/tns-core/recipe/glow_lichen.json
+27afdbc5c89325b1396c7fda7de3991c5f950b95 data/tns-core/recipe/quartz.json
+b66dc4d077bf3b2da6a7b64311d0a9e29e6dbb67 data/tns-core/recipe/red_sand.json
+7b58c1ad378e54eef2e68e87c96d9e7f0b6a728d data/tns-core/recipe/sponge.json
