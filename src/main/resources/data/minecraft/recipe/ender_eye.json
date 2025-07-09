@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "ender_eye",
+    "category": "misc",
+    "ingredients": [
+        "minecraft:ender_pearl",
+        "minecraft:popped_chorus_fruit"
+    ],
+    "result": {
+        "count": 1,
+        "id": "minecraft:ender_eye"
+    }
+}

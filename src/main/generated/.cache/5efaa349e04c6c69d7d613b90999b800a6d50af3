@@ -2,7 +2,9 @@
 a58e17db8164fb31a9178402d4fdb83282a85639 data/tns-core/advancement/recipes/building_blocks/quartz.json
 560b0e4d6f79b416a0e859d394598274eb16e3fe data/tns-core/advancement/recipes/building_blocks/red_sand.json
 2b7c6d22f14e6a993e5b855fcf6a16d8a13cc66d data/tns-core/advancement/recipes/building_blocks/sponge.json
+debdbf8343e9be0c57aca38afab3f4b8967439ca data/tns-core/advancement/recipes/misc/ender_eye.json
 4fa1fbd070e4c8c368d930f7585986b3e61d669c data/tns-core/advancement/recipes/misc/glow_lichen.json
+e12ba198c678def0dbaa45102c215ac2b174e06c data/tns-core/recipe/ender_eye.json
 3f4dea3d0a64dd848e74ba302e082d339031ea6b data/tns-core/recipe/glow_lichen.json
 27afdbc5c89325b1396c7fda7de3991c5f950b95 data/tns-core/recipe/quartz.json
 b66dc4d077bf3b2da6a7b64311d0a9e29e6dbb67 data/tns-core/recipe/red_sand.json
