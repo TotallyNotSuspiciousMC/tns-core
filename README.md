@@ -10,7 +10,7 @@ This is my current TODO list.
 - [x] Nations structure, a not-quite-factions system designed to enhance player interactivity on the server.
 - [x] Recipe changes, as usual.
 - [ ] Automatic loading of experimental datapacks (Villager Trade Rebalance)
-- [ ] Anvil XP change
+- [x] Anvil XP change
 - [ ] Custom Advancements for fun
 - [x] Custom loot tables
 

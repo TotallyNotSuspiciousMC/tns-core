@@ -33,7 +33,9 @@ public final class TNSCoreDynmapListener extends DynmapCommonAPIListener {
     }
 
     private void onChunkClaimed(ServerWorld world, NationClaimChunkComponent claim, Nation oldNation) {
-
+        if (markerSet == null) {
+            return;
+        }
     }
 
     private void onChunkUnClaimed(ServerWorld world, NationClaimChunkComponent claim, Nation oldNation) {
