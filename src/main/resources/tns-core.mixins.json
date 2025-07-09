@@ -3,6 +3,7 @@
     "package": "com.totallynotsuspicious.core.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        "AnvilScreenHandlerMixin",
         "BlockItemMixin",
         "ServerCommonNetworkHandlerMixin",
         "ServerCommonNetworkHandlerMixin$ServerPlayNetworkHandlerMixin",

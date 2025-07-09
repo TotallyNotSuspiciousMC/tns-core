@@ -12,7 +12,7 @@ This is my current TODO list.
 - [ ] Automatic loading of experimental datapacks (Villager Trade Rebalance)
 - [ ] Anvil XP change
 - [ ] Custom Advancements for fun
-- [ ] Custom loot tables
+- [x] Custom loot tables
 
 ## License
 
