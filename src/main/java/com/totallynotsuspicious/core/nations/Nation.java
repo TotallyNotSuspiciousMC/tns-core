@@ -5,6 +5,8 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.Arrays;
+
 public enum Nation implements StringIdentifiable {
 
     NATIONLESS("nationless", NationData.NATIONLESS),
@@ -12,6 +14,10 @@ public enum Nation implements StringIdentifiable {
     PANDORA("pandora", NationData.PANDORA),
     TAURE_ARANOE("taure_aranie", NationData.TAURE_ARANIE),
     VAYUNE("vayune", NationData.VAYUNE);
+
+    public static final Nation[] NATIONS = Arrays.stream(Nation.values())
+            .filter(Nation::isNotNationless)
+            .toArray(Nation[]::new);
 
     public static final EnumCodec<Nation> CODEC = StringIdentifiable.createCodec(Nation::values);
 

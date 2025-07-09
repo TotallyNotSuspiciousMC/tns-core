@@ -1,12 +1,33 @@
 package com.totallynotsuspicious.core.world;
 
 import com.totallynotsuspicious.core.nations.Nation;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.world.chunk.Chunk;
 import org.ladysnake.cca.api.v3.component.Component;
 
 public class NationClaimChunkComponent implements Component {
+    public static final Event<ClaimEvent> ON_CLAIMED = EventFactory.createArrayBacked(
+            ClaimEvent.class,
+            listeners -> (world, claim, oldNation) -> {
+                for (ClaimEvent listener : listeners) {
+                    listener.onClaimChanged(world, claim, oldNation);
+                }
+            }
+    );
+
+    public static final Event<ClaimEvent> ON_UNCLAIMED = EventFactory.createArrayBacked(
+            ClaimEvent.class,
+            listeners -> (world, claim, oldNation) -> {
+                for (ClaimEvent listener : listeners) {
+                    listener.onClaimChanged(world, claim, oldNation);
+                }
+            }
+    );
+
     private static final String CLAIMED_NATION_KEY = "claimed_nation";
 
     private final Chunk chunk;
@@ -30,17 +51,24 @@ public class NationClaimChunkComponent implements Component {
         writeView.put(CLAIMED_NATION_KEY, Nation.CODEC, this.claimedNation);
     }
 
-    public boolean claim(Nation nation) {
+    public boolean tryClaim(ServerWorld world, Nation nation) {
         if (this.claimedNation.isNationless()) {
-            this.claimedNation = nation;
+            this.setClaim(world, nation);
             return true;
         }
 
         return false;
     }
 
-    public void forceClaim(Nation nation) {
+    public void setClaim(ServerWorld world, Nation nation) {
+        Nation oldNation = this.claimedNation;
         this.claimedNation = nation;
+
+        if (this.claimedNation.isNotNationless()) {
+            ON_CLAIMED.invoker().onClaimChanged(world, this, oldNation);
+        } else {
+            ON_UNCLAIMED.invoker().onClaimChanged(world, this, oldNation);
+        }
     }
 
     public Nation getClaimedNation() {
@@ -53,5 +81,14 @@ public class NationClaimChunkComponent implements Component {
         } else {
             return this.claimedNation == nation;
         }
+    }
+
+    public Chunk getChunk() {
+        return chunk;
+    }
+
+    @FunctionalInterface
+    public interface ClaimEvent {
+        void onClaimChanged(ServerWorld world, NationClaimChunkComponent claim, Nation oldNation);
     }
 }

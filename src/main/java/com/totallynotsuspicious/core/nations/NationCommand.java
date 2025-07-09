@@ -154,10 +154,10 @@ public final class NationCommand {
 
         boolean success;
         if (force) {
-            component.forceClaim(nation);
+            component.setClaim(source.getWorld(), nation);
             success = true;
         } else {
-            success = component.claim(nation);
+            success = component.tryClaim(source.getWorld(), nation);
         }
 
         if (success) {

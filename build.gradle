@@ -29,6 +29,8 @@ repositories {
 	}
 
 	maven { url 'https://maven.nucleoid.xyz' }
+
+	maven { url "https://repo.mikeprimm.com/" }
 }
 
 loom {
@@ -67,6 +69,8 @@ dependencies {
 	modImplementation include("xyz.nucleoid:server-translations-api:${project.translation_api_version}")
 
 	modImplementation("eu.pb4:placeholder-api:${project.placeholder_api_version}")
+
+	modCompileOnly("us.dynmap:DynmapCoreAPI:${project.dynmap_version}")
 
 	// TODO: repalce with modrinth maven when approved
 	modImplementation "curse.maven:novoatlas-1297254:6711321"
