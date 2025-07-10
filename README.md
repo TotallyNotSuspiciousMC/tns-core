@@ -9,10 +9,10 @@ This is my current TODO list.
 - [x] A custom map powered by [NovoAtlas](https://github.com/TheDeathlyCow/novoatlas).
 - [x] Nations structure, a not-quite-factions system designed to enhance player interactivity on the server.
 - [x] Recipe changes, as usual.
-- [ ] Automatic loading of experimental datapacks (Villager Trade Rebalance)
 - [x] Anvil XP change
 - [ ] Custom Advancements for fun
 - [x] Custom loot tables
+- [x] Disable slime chunks
 
 ## License
 

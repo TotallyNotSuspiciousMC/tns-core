@@ -211,5 +211,63 @@
                 "color": "#0a8baf"
             }
         ]
+    },
+    "cave_biomes": {
+        "layers": [
+            {
+                "y_range": {
+                    "min": -64,
+                    "max": 0
+                },
+                "biomes": {
+                    "map": "tns-core:overworld_deep_caves",
+                    "biomes": [
+                        {
+                            "biome": "novoatlas:surface_biome",
+                            "color": "#ffffff"
+                        },
+                        {
+                            "biome": "minecraft:deep_dark",
+                            "color": "#16352d"
+                        },
+                        {
+                            "biome": "minecraft:lush_caves",
+                            "color": "#52bf13"
+                        },
+                        {
+                            "biome": "minecraft:dripstone_caves",
+                            "color": "#b7ab8d"
+                        }
+                    ]
+                }
+            },
+            {
+                "y_range": {
+                    "min": 1,
+                    "max": 256
+                },
+                "biomes": {
+                    "map": "tns-core:overworld_caves",
+                    "biomes": [
+                        {
+                            "biome": "novoatlas:surface_biome",
+                            "color": "#ffffff"
+                        },
+                        {
+                            "biome": "minecraft:deep_dark",
+                            "color": "#16352d"
+                        },
+                        {
+                            "biome": "minecraft:lush_caves",
+                            "color": "#52bf13"
+                        },
+                        {
+                            "biome": "minecraft:dripstone_caves",
+                            "color": "#b7ab8d"
+                        }
+                    ]
+                }
+            }
+        ]
     }
 }

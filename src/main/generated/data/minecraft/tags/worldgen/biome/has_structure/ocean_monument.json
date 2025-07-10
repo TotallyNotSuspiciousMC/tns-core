@@ -1,0 +1,9 @@
+{
+  "replace": true,
+  "values": [
+    {
+      "id": "tns-core:deep_ancient_ocean",
+      "required": false
+    }
+  ]
+}

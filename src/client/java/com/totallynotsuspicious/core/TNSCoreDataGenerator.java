@@ -9,5 +9,7 @@ public class TNSCoreDataGenerator implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
 		pack.addProvider(TNSRecipeGenerator::new);
+		pack.addProvider(TNSBiomeGenerator::new);
+		pack.addProvider(TNSBiomeTagGenerator::new);
 	}
 }

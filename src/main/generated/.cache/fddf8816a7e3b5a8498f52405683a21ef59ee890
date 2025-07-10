@@ -1,0 +1,5 @@
+// 1.21.7	-999999999-01-01T00:00:00	TNS Core/Tags for minecraft:worldgen/biome
+b47e072753ee333ed7cdf2dfdd36f34f5455fc43 data/c/tags/worldgen/biome/is_deep_ocean.json
+f4b82abfe9a36a820721129f7e871e5d55ee2203 data/minecraft/tags/worldgen/biome/has_structure/ocean_monument.json
+b47e072753ee333ed7cdf2dfdd36f34f5455fc43 data/minecraft/tags/worldgen/biome/has_structure/ocean_ruin_cold.json
+b47e072753ee333ed7cdf2dfdd36f34f5455fc43 data/minecraft/tags/worldgen/biome/is_deep_ocean.json
