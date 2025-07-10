@@ -11,5 +11,6 @@ public class TNSCoreDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(TNSRecipeGenerator::new);
 		pack.addProvider(TNSBiomeGenerator::new);
 		pack.addProvider(TNSBiomeTagGenerator::new);
+		pack.addProvider(TNSEntityTypeTagGenerator::new);
 	}
 }
