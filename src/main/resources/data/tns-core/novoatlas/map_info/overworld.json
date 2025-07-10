@@ -7,6 +7,10 @@
         "map": "tns-core:overworld",
         "biomes": [
             {
+                "biome": "tns-core:deep_ancient_ocean",
+                "color": "#293dd6"
+            },
+            {
                 "biome": "minecraft:ocean",
                 "color": "#006eff"
             },
