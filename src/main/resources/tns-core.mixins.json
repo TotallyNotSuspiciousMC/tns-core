@@ -7,7 +7,8 @@
         "BlockItemMixin",
         "ServerCommonNetworkHandlerMixin",
         "ServerCommonNetworkHandlerMixin$ServerPlayNetworkHandlerMixin",
-        "ShapedRecipeMixin"
+        "ShapedRecipeMixin",
+        "SlimeEntityMixin"
     ],
     "injectors": {
         "defaultRequire": 1
