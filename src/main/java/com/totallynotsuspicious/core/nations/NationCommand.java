@@ -9,6 +9,7 @@ import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
+import com.totallynotsuspicious.core.nations.claims.ClaimsLookupV2;
 import com.totallynotsuspicious.core.world.NationClaimChunkComponent;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.command.CommandRegistryAccess;
@@ -102,25 +103,25 @@ public final class NationCommand {
                         ))
                 )
                 .then(literal("claim")
-                        .requires(NationCommand::hasManagePermission)
-                        .then(argument(posArg, BlockPosArgumentType.blockPos())
-                                .then(nationArgument(nationArg)
-                                        .executes(ctx -> executeClaim(
-                                                ctx.getSource(),
-                                                BlockPosArgumentType.getBlockPos(ctx, posArg),
-                                                Nation.CODEC.byId(StringArgumentType.getString(ctx, nationArg), Nation.NATIONLESS),
-                                                false
-                                        ))
-                                        .then(argument(forceArg, BoolArgumentType.bool())
-                                                .executes(ctx -> executeClaim(
-                                                        ctx.getSource(),
-                                                        BlockPosArgumentType.getBlockPos(ctx, posArg),
-                                                        Nation.CODEC.byId(StringArgumentType.getString(ctx, nationArg), Nation.NATIONLESS),
-                                                        BoolArgumentType.getBool(ctx, forceArg)
-                                                ))
-                                        )
-                                )
-                        )
+//                        .requires(NationCommand::hasManagePermission)
+//                        .then(argument(posArg, BlockPosArgumentType.blockPos())
+//                                .then(nationArgument(nationArg)
+//                                        .executes(ctx -> executeClaim(
+//                                                ctx.getSource(),
+//                                                BlockPosArgumentType.getBlockPos(ctx, posArg),
+//                                                Nation.CODEC.byId(StringArgumentType.getString(ctx, nationArg), Nation.NATIONLESS),
+//                                                false
+//                                        ))
+//                                        .then(argument(forceArg, BoolArgumentType.bool())
+//                                                .executes(ctx -> executeClaim(
+//                                                        ctx.getSource(),
+//                                                        BlockPosArgumentType.getBlockPos(ctx, posArg),
+//                                                        Nation.CODEC.byId(StringArgumentType.getString(ctx, nationArg), Nation.NATIONLESS),
+//                                                        BoolArgumentType.getBool(ctx, forceArg)
+//                                                ))
+//                                        )
+//                                )
+//                        )
                         .then(literal("query")
                                 .then(argument(posArg, BlockPosArgumentType.blockPos())
                                         .executes(ctx -> executeQueryClaim(
@@ -134,10 +135,7 @@ public final class NationCommand {
     }
 
     private static int executeQueryClaim(ServerCommandSource source, BlockPos pos) {
-        Chunk chunk = source.getWorld().getChunk(pos);
-        NationClaimChunkComponent component = NationClaimChunkComponent.get(chunk);
-
-        Nation claimed = component.getClaimedNation();
+        Nation claimed = ClaimsLookupV2.getClaimedNation(source.getWorld(), pos);
 
         if (claimed.isNotNationless()) {
             source.sendFeedback(() -> Text.translatable("tnscore.commands.nation.claim.query.claimed", claimed.getTitle()), false);

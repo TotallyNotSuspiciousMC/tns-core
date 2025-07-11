@@ -9,6 +9,7 @@ import net.minecraft.storage.WriteView;
 import net.minecraft.world.chunk.Chunk;
 import org.ladysnake.cca.api.v3.component.Component;
 
+@Deprecated
 public class NationClaimChunkComponent implements Component {
     public static final Event<ClaimEvent> ON_CLAIMED = EventFactory.createArrayBacked(
             ClaimEvent.class,
