@@ -4,6 +4,7 @@ import com.totallynotsuspicious.core.TNSCore;
 import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
 import com.totallynotsuspicious.core.event.PlaceBlockCallback;
 import com.totallynotsuspicious.core.nations.claims.ClaimsLookupV2;
+import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.dialog.type.Dialog;
@@ -55,10 +56,18 @@ public final class NationsManager {
     }
 
     private static void checkClaimedArea(World world, BlockPos pos, PlayerEntity player) {
-        PlayerNationComponent nationComponent = PlayerNationComponent.get(player);
+        if (Permissions.check(player, "tnscore.bypassclaims")) {
+            return;
+        }
 
-        if (!ClaimsLookupV2.canNationBuild(world, pos, nationComponent.getNation())) {
-            player.sendMessage(Text.translatable("tnscore.nations.claimedChunk").formatted(Formatting.RED), false);
+        PlayerNationComponent nationComponent = PlayerNationComponent.get(player);
+        Nation claimedNation = ClaimsLookupV2.getClaimedNation(world, pos);
+        if (claimedNation.isNotNationless() && claimedNation != nationComponent.getNation()) {
+            player.sendMessage(
+                    Text.translatable("tnscore.nations.claimedChunk", claimedNation.getTitle())
+                            .formatted(Formatting.RED),
+                    false
+            );
         }
     }
 

@@ -1,12 +1,14 @@
 package com.totallynotsuspicious.core;
 
 import com.totallynotsuspicious.core.compat.TNSCorePlaceholders;
+import com.totallynotsuspicious.core.compat.TNSCoreSquareMapMarkers;
 import com.totallynotsuspicious.core.entity.TNSLootModifiers;
 import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
 import com.totallynotsuspicious.core.nations.NationCommand;
 import com.totallynotsuspicious.core.nations.NationsManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ public class TNSCore implements ModInitializer {
         TNSCorePlaceholders.initialize();
         CommandRegistrationCallback.EVENT.register(NationCommand::registerCommand);
         TNSLootModifiers.initialize();
+        ServerLifecycleEvents.SERVER_STARTED.register(new TNSCoreSquareMapMarkers());
     }
 
     public static Identifier id(String path) {

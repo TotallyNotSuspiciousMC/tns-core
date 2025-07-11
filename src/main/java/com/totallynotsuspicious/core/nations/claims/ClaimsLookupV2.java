@@ -7,17 +7,12 @@ import com.totallynotsuspicious.core.TNSCore;
 import com.totallynotsuspicious.core.nations.Nation;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.world.World;
 
 public final class ClaimsLookupV2 {
     public static final RegistryKey<MapImage> IMAGE_KEY = RegistryKey.of(NovoAtlasResourceKeys.BIOME_MAP, TNSCore.id("claim_map"));
     public static final RegistryKey<MapInfo> OVERWORLD_MAP_INFO = RegistryKey.of(NovoAtlasResourceKeys.MAP_INFO, TNSCore.id("overworld"));
-
-    public static boolean canNationBuild(World world, BlockPos pos, Nation nation) {
-        Nation claimant = getClaimedNation(world, pos);
-        return claimant.isNationless() || claimant == nation;
-    }
 
     public static Nation getClaimedNation(World world, BlockPos pos) {
         if (world.getRegistryKey() != World.OVERWORLD) {
@@ -25,24 +20,26 @@ public final class ClaimsLookupV2 {
         }
 
         MapImage image = MapInfo.lookupBiomeMap(IMAGE_KEY);
-        ChunkPos chunkPos = new ChunkPos(pos);
+
+        int chunkX = ChunkSectionPos.getSectionCoord(pos.getX());
+        int chunkZ = ChunkSectionPos.getSectionCoord(pos.getZ());
 
         MapInfo info = world.getRegistryManager()
                 .getOrThrow(NovoAtlasResourceKeys.MAP_INFO)
                 .getValueOrThrow(OVERWORLD_MAP_INFO);
 
-        int color = image.sample(chunkPos.x, chunkPos.z, info, Integer.MIN_VALUE);
+        int color = image.sample(chunkX, chunkZ, info, Integer.MIN_VALUE);
 
         return Color2NationLookup.getNation(color);
     }
 
-    private static class Color2NationLookup {
-        private static final int FIDELIS_COLOR = 0xff0000;
-        private static final int PANDORA_COLOR = 0xffff00;
-        private static final int TAURE_ARANIE_COLOR = 0x00ff00;
-        private static final int VAYUNE_COLOR = 0x0000ff;
+    public static class Color2NationLookup {
+        public static final int FIDELIS_COLOR = 0xff0000;
+        public static final int PANDORA_COLOR = 0xffff00;
+        public static final int TAURE_ARANIE_COLOR = 0x00ff00;
+        public static final int VAYUNE_COLOR = 0x0000ff;
 
-        private static Nation getNation(int color) {
+        public static Nation getNation(int color) {
             return switch (color) {
                 case FIDELIS_COLOR -> Nation.FIDELIS;
                 case PANDORA_COLOR -> Nation.PANDORA;
@@ -50,6 +47,9 @@ public final class ClaimsLookupV2 {
                 case VAYUNE_COLOR -> Nation.VAYUNE;
                 default -> Nation.NATIONLESS;
             };
+        }
+
+        private Color2NationLookup() {
         }
     }
 

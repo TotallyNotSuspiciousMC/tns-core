@@ -11,5 +11,5 @@
     "tnscore.nations.join.accepted.change": "For the next week, you can request to change your nation at any time by pressing %s. After this time, you must make a ticket on Discord to change nations.",
     "tnscore.nations.join.accepted.normal": "You have joined %s!",
     "tnscore.nations.join.accepted.nationless": "You are now Nationless!",
-    "tnscore.nations.claimedChunk": "You are building in a chunk claimed by another nation!"
+    "tnscore.nations.claimedChunk": "You are building in a chunk claimed by %s!"
 }
