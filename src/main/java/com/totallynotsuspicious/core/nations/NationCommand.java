@@ -1,13 +1,16 @@
 package com.totallynotsuspicious.core.nations;
 
+import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
+import com.mojang.logging.LogUtils;
 import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
 import com.totallynotsuspicious.core.nations.claims.ClaimsLookupV2;
 import com.totallynotsuspicious.core.world.NationClaimChunkComponent;
@@ -15,17 +18,28 @@ import me.lucko.fabric.api.permissions.v0.Permissions;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.GameProfileArgumentType;
 import net.minecraft.entity.Entity;
+import net.minecraft.network.packet.c2s.common.SyncedClientOptions;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
 import net.minecraft.text.Text;
+import net.minecraft.util.ErrorReporter;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -81,10 +95,10 @@ public final class NationCommand {
                 )
                 .then(literal("get")
                         .requires(NationCommand::hasManagePermission)
-                        .then(argument(playerArg, EntityArgumentType.player())
+                        .then(argument(playerArg, GameProfileArgumentType.gameProfile())
                                 .executes(ctx -> executeGet(
                                         ctx.getSource(),
-                                        EntityArgumentType.getPlayer(ctx, playerArg)
+                                        GameProfileArgumentType.getProfileArgument(ctx, playerArg).iterator().next()
                                 ))
                         )
                 )
@@ -173,7 +187,9 @@ public final class NationCommand {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int executeGet(ServerCommandSource source, ServerPlayerEntity player) {
+    private static int executeGet(ServerCommandSource source, GameProfile profile) throws CommandSyntaxException {
+        ServerPlayerEntity player = getRequestedPlayer(source.getServer(), profile);
+
         Nation nation = PlayerNationComponent.get(player).getNation();
 
         if (nation.isNotNationless()) {
@@ -219,6 +235,39 @@ public final class NationCommand {
 
                     return builder.build();
                 }));
+    }
+
+
+    // CREDIT:
+    // InvView https://github.com/PotatoPresident/InvView/blob/master/src/main/java/us/potatoboy/invview/ViewCommand.java
+    private static ServerPlayerEntity getRequestedPlayer(MinecraftServer server, GameProfile profile)
+            throws CommandSyntaxException {
+        ServerPlayerEntity requestedPlayer = server.getPlayerManager().getPlayer(profile.getName());
+
+        // If player is not currently online
+        if (requestedPlayer == null) {
+            requestedPlayer = new ServerPlayerEntity(server, server.getOverworld(), profile, SyncedClientOptions.createDefault());
+
+            Optional<ReadView> readViewOpt = server.getPlayerManager()
+                    .loadPlayerData(requestedPlayer, new ErrorReporter.Logging(LogUtils.getLogger()));
+
+            // Avoids player's dimension being reset to the overworld
+            if (readViewOpt.isPresent()) {
+                ReadView readView = readViewOpt.get();
+                Optional<String> dimension = readView.getOptionalString("Dimension");
+
+                if (dimension.isPresent()) {
+                    ServerWorld world = server.getWorld(
+                            RegistryKey.of(RegistryKeys.WORLD, Identifier.tryParse(dimension.get())));
+
+                    if (world != null) {
+                        requestedPlayer.setServerWorld(world);
+                    }
+                }
+            }
+        }
+
+        return requestedPlayer;
     }
 
     private NationCommand() {
