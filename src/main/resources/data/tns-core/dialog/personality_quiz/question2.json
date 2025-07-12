@@ -7,8 +7,8 @@
         "type": "minecraft:plain_message",
         "contents": [
             "A - I try to play it sneaky, build traps, and catch people off-guard.\n",
-            "B - I run and hide.\n",
-            "C - I try to avoid direct confrontation, I prefer everyone to work out their differences by talking.\n",
+            "B - I try to avoid fighting, I prefer everyone to work out their differences by talking.\n",
+            "C - I want no part in it, and try to avoid conflict all together.\n",
             "D - I jump straight to killing.\n"
         ]
     },
@@ -16,15 +16,10 @@
         {
             "type": "minecraft:single_option",
             "key": "answer",
-            "label": "",
+            "label": {
+                "translate": "tnscore.nations.quiz.form.answer.select"
+            },
             "options": [
-                {
-                    "id": "invalid",
-                    "display": {
-                        "translate": "tnscore.nations.quiz.form.answer.select"
-                    },
-                    "initial": true
-                },
                 {
                     "id": "pandora_answer",
                     "display": {

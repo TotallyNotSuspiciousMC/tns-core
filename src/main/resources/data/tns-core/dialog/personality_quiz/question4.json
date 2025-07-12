@@ -1,15 +1,15 @@
 {
     "type": "minecraft:notice",
-    "title": "Which of the following is your preferred biome to live in?",
+    "title": "What is your ideal base like?",
     "can_close_with_escape": false,
     "after_action": "wait_for_response",
     "body": {
         "type": "minecraft:plain_message",
         "contents": [
-            "A - Forests.\n",
-            "B - Mountains.\n",
-            "C - Plains or Jungles.\n",
-            "D - Deserts or Swamps.\n"
+            "A - A secluded hideaway tucked far from the noise, with only me and maybe a few friends.\n",
+            "B - A grand castle with lots of other players coming and going.\n",
+            "C - A mess of farms and contraptions, where everything has a use.\n",
+            "D - A cozy, picturesque home nestled into the landscape. Something that is calm and beautiful.\n"
         ]
     },
     "inputs": [
@@ -21,25 +21,25 @@
             },
             "options": [
                 {
-                    "id": "taure_aranie_answer",
+                    "id": "vayune_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.a"
                     }
                 },
                 {
-                    "id": "vayune_answer",
+                    "id": "fidelis_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.b"
                     }
                 },
                 {
-                    "id": "fidelis_answer",
+                    "id": "pandora_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.c"
                     }
                 },
                 {
-                    "id": "pandora_answer",
+                    "id": "taure_aranie_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.d"
                     }
@@ -53,7 +53,7 @@
         },
         "action": {
             "type": "dynamic/custom",
-            "id": "tns-core-personality-quiz:preferred_biome"
+            "id": "tns-core-personality-quiz:ideal_base"
         }
     }
 }

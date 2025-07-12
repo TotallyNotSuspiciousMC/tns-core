@@ -1,15 +1,15 @@
 {
     "type": "minecraft:notice",
-    "title": "Which of the following is your preferred biome to live in?",
+    "title": "Finally, how would your friends describe you?",
     "can_close_with_escape": false,
     "after_action": "wait_for_response",
     "body": {
         "type": "minecraft:plain_message",
         "contents": [
-            "A - Forests.\n",
-            "B - Mountains.\n",
-            "C - Plains or Jungles.\n",
-            "D - Deserts or Swamps.\n"
+            "A - Quiet and relaxed.\n",
+            "B - Energetic and charismatic.\n",
+            "C - Industrious and inquisitive.\n",
+            "D - Artistic and creative.\n"
         ]
     },
     "inputs": [
@@ -21,25 +21,25 @@
             },
             "options": [
                 {
-                    "id": "taure_aranie_answer",
+                    "id": "vayune_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.a"
                     }
                 },
                 {
-                    "id": "vayune_answer",
+                    "id": "fidelis_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.b"
                     }
                 },
                 {
-                    "id": "fidelis_answer",
+                    "id": "pandora_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.c"
                     }
                 },
                 {
-                    "id": "pandora_answer",
+                    "id": "taure_aranie_answer",
                     "display": {
                         "translate": "tnscore.nations.quiz.form.answer.d"
                     }
@@ -53,7 +53,7 @@
         },
         "action": {
             "type": "dynamic/custom",
-            "id": "tns-core-personality-quiz:preferred_biome"
+            "id": "tns-core-personality-quiz:friends_description"
         }
     }
 }

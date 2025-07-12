@@ -1,15 +1,15 @@
 {
     "type": "minecraft:notice",
-    "title": "Which of the following is your preferred biome to live in?",
+    "title": "Pick the quote that you resonate with the most.",
     "can_close_with_escape": false,
     "after_action": "wait_for_response",
     "body": {
         "type": "minecraft:plain_message",
         "contents": [
-            "A - Forests.\n",
-            "B - Mountains.\n",
-            "C - Plains or Jungles.\n",
-            "D - Deserts or Swamps.\n"
+            "A - \"Never again shall I make their like; and if I must break them, I shall break my heart.\"\n",
+            "B - \"Pride is not the opposite of shame, but its source.\"\n",
+            "C - \"Fire and Blood.\"\n",
+            "D - \"One man's 'magic' is another man's engineering.\"\n"
         ]
     },
     "inputs": [
@@ -53,7 +53,7 @@
         },
         "action": {
             "type": "dynamic/custom",
-            "id": "tns-core-personality-quiz:preferred_biome"
+            "id": "tns-core-personality-quiz:quote"
         }
     }
 }

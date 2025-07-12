@@ -16,15 +16,10 @@
         {
             "type": "minecraft:single_option",
             "key": "answer",
-            "label": "",
+            "label": {
+                "translate": "tnscore.nations.quiz.form.answer.select"
+            },
             "options": [
-                {
-                    "id": "invalid",
-                    "display": {
-                        "translate": "tnscore.nations.quiz.form.answer.select"
-                    },
-                    "initial": true
-                },
                 {
                     "id": "fidelis_answer",
                     "display": {

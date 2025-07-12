@@ -14,7 +14,7 @@
     "tnscore.nations.claimedChunk": "You are building in a chunk claimed by %s!",
     "tnscore.nations.quiz.result.title": "Personality Quiz Results",
     "tnscore.nations.quiz.result.subtitle": "These are the Nations that we recommend that you join:",
-    "tnscore.nations.quiz.result.winner": "%s: %s",
+    "tnscore.nations.quiz.result.winner": "%s\n-----\n%s",
     "tnscore.gui.ok": "Ok",
     "tnscore.gui.submit": "Submit",
     "tnscore.nations.quiz.invalid.title": "Invalid Personality Form",
@@ -23,5 +23,10 @@
     "tnscore.nations.quiz.form.answer.b": "B",
     "tnscore.nations.quiz.form.answer.c": "C",
     "tnscore.nations.quiz.form.answer.d": "D",
-    "tnscore.nations.quiz.form.answer.select": "Select an Answer"
+    "tnscore.nations.quiz.form.answer.select": "Select an Answer",
+    "tnscore.nation.nationless.desc": "Lone wolves who don't like to keep company.",
+    "tnscore.nation.fidelis.desc": "You thrive on strength, loyalty, and the thrill of war. You live for glory and dominance. PvP is your language, discipline your craft. Glory to vSharpies, Imperator!",
+    "tnscore.nation.pandora.desc": "You think in tick timings and chunk borders. Where others see an empty desert, you see potential. Your base may be ugly, but it works. Farms and storage systems: you don’t build for beauty, you build for throughput.",
+    "tnscore.nation.taureAranie.desc": "You build for beauty, not for function. You might spend an hour decorating a hill side with plants and custom trees--not because you have to--but because it feels right. Your base isn't a factory, it’s a story.",
+    "tnscore.nation.vayune.desc": "You value solitude, balance, and clarity. Your home is above the clouds, far removed from the troubles of this world. Riding your Happy Ghast is where you feel most at home."
 }

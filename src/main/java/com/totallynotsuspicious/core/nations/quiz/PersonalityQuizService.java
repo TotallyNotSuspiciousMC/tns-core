@@ -104,6 +104,13 @@ public class PersonalityQuizService {
         QuizForm.QuizAnswer answer = result.getOrThrow().getFirst().answer();
         form.addAnswer(question, answer);
 
+        TNSCore.LOGGER.info(
+                "Player {} answered question {} favouring {}",
+                handler.getPlayer().getGameProfile().getName(),
+                question,
+                answer
+        );
+
         QuizForm.QuizQuestion nextQuestion = question.getNextQuestion();
         if (nextQuestion != null) {
             nextQuestion.openDialog(handler.getPlayer());
@@ -140,6 +147,17 @@ public class PersonalityQuizService {
         handler.getPlayer().openDialog(RegistryEntry.of(returnMessage));
 
         FORMS_IN_PROGRESS.remove(handler.getPlayer().getUuid());
+
+        TNSCore.LOGGER.info(
+                "Player {} completed their personality quiz and were recommended {}",
+                handler.getPlayer().getGameProfile().getName(),
+                winners
+        );
+
+        TNSCore.LOGGER.info(
+                "Final counts: {}",
+                finalCounts
+        );
     }
 
     private static List<Nation> getWinners(List<Map.Entry<Nation, Integer>> finalCounts) {
