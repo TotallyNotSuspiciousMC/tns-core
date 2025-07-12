@@ -18,24 +18,24 @@ public record NationData(
     public static final NationData FIDELIS = new NationData(
             Text.literal("Fidelis").formatted(Formatting.RED, Formatting.BOLD),
             Formatting.RED,
-            BlockPos.ORIGIN
+            new BlockPos(-1964, 97, 213)
     );
 
     public static final NationData PANDORA = new NationData(
             Text.literal("Pandora").formatted(Formatting.GOLD, Formatting.BOLD),
             Formatting.GOLD,
-            BlockPos.ORIGIN
+            new BlockPos(1207, 75, -1751)
     );
 
     public static final NationData TAURE_ARANIE = new NationData(
             Text.literal("Taure Aranië").formatted(Formatting.GREEN, Formatting.BOLD),
             Formatting.GREEN,
-            BlockPos.ORIGIN
+            new BlockPos(2113, 120, 69)
     );
 
     public static final NationData VAYUNE = new NationData(
             Text.literal("Vayune").formatted(Formatting.AQUA, Formatting.BOLD),
             Formatting.AQUA,
-            BlockPos.ORIGIN
+            new BlockPos(2198, 96, 830)
     );
 }

@@ -89,7 +89,7 @@ public class PlayerNationComponent implements Component {
         if (this.timeJoinedFirstNation == null || this.nation.isNationless()) {
             return true;
         }
-        return now.isBefore(this.timeJoinedFirstNation.plus(30L, ChronoUnit.SECONDS));
+        return now.isBefore(this.timeJoinedFirstNation.plus(7L, ChronoUnit.DAYS));
     }
 
     public static PlayerNationComponent get(PlayerEntity player) {

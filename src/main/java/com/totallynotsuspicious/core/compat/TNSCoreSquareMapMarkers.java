@@ -58,7 +58,7 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
                 map.put(
                         Nation.VAYUNE,
                         MarkerOptions.builder()
-                                .fillColor(new Color(ClaimsLookupV2.Color2NationLookup.VAYUNE_COLOR))
+                                .fillColor(new Color(0x95f4fc))
                                 .stroke(false)
                                 .build()
                 );
