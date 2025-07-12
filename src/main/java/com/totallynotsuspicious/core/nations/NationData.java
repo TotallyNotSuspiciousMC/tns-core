@@ -14,7 +14,7 @@ public record NationData(
             Text.literal("Nationless").formatted(Formatting.GRAY, Formatting.ITALIC),
             Text.translatable("tnscore.nation.nationless.desc"),
             Formatting.GRAY,
-            BlockPos.ORIGIN
+            new BlockPos(-130, 76, -85)
     );
 
     public static final NationData FIDELIS = new NationData(
