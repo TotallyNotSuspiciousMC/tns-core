@@ -42,16 +42,17 @@
                     "bold": true,
                     "color": "gray"
                 },
-                "Being Nationless will relegate you to a frozen wasteland in The South. You will not have the right to build anywhere except in this neutral zone, but you will be free to go it completely on your own, without anyone telling you what to do.\n\nYou can read more about nations, and the other changes this season, here: ",
+                "Being Nationless will relegate you to a frozen wasteland in The South. You will not have the right to build anywhere except in this neutral zone, but you will be free to go it completely on your own, without anyone telling you what to do.\n\nYou can read more about nations, and the other changes this season, ",
                 {
-                    "text": "<ADD LINK HERE>",
+                    "text": "at this link",
                     "underlined": true,
                     "color": "blue",
                     "click_event": {
                         "action": "open_url",
-                        "url": "https://link.com"
+                        "url": "https://docs.google.com/document/d/1vyIjNe4PTuU2TXvjlw4LUpe5nUZdjLiJbvkmQQ1oMk8/edit?usp=sharing"
                     }
-                }
+                },
+                "."
             ]
         }
     ],
