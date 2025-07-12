@@ -11,5 +11,17 @@
     "tnscore.nations.join.accepted.change": "For the next week, you can request to change your nation at any time by pressing %s. After this time, you must make a ticket on Discord to change nations.",
     "tnscore.nations.join.accepted.normal": "You have joined %s!",
     "tnscore.nations.join.accepted.nationless": "You are now Nationless!",
-    "tnscore.nations.claimedChunk": "You are building in a chunk claimed by %s!"
+    "tnscore.nations.claimedChunk": "You are building in a chunk claimed by %s!",
+    "tnscore.nations.quiz.result.title": "Personality Quiz Results",
+    "tnscore.nations.quiz.result.subtitle": "These are the Nations that we recommend that you join:",
+    "tnscore.nations.quiz.result.winner": "%s: %s",
+    "tnscore.gui.ok": "Ok",
+    "tnscore.gui.submit": "Submit",
+    "tnscore.nations.quiz.invalid.title": "Invalid Personality Form",
+    "tnscore.nations.quiz.invalid.body": "Your personality quiz form was invalid. Did you forget to answer a question?",
+    "tnscore.nations.quiz.form.answer.a": "A",
+    "tnscore.nations.quiz.form.answer.b": "B",
+    "tnscore.nations.quiz.form.answer.c": "C",
+    "tnscore.nations.quiz.form.answer.d": "D",
+    "tnscore.nations.quiz.form.answer.select": "Select an Answer"
 }

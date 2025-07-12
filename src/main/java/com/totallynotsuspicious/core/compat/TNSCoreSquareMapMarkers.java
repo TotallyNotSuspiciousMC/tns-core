@@ -1,22 +1,24 @@
 package com.totallynotsuspicious.core.compat;
 
+import com.google.common.base.Stopwatch;
 import com.thedeathlycow.novoatlas.registry.NovoAtlasResourceKeys;
 import com.thedeathlycow.novoatlas.world.gen.MapImage;
 import com.thedeathlycow.novoatlas.world.gen.MapInfo;
 import com.totallynotsuspicious.core.TNSCore;
 import com.totallynotsuspicious.core.nations.Nation;
 import com.totallynotsuspicious.core.nations.claims.ClaimsLookupV2;
-import io.netty.util.concurrent.CompleteFuture;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.jpenilla.squaremap.api.*;
 import xyz.jpenilla.squaremap.api.Point;
+import xyz.jpenilla.squaremap.api.marker.Icon;
 import xyz.jpenilla.squaremap.api.marker.Marker;
 import xyz.jpenilla.squaremap.api.marker.MarkerOptions;
 import xyz.jpenilla.squaremap.api.marker.Rectangle;
@@ -48,7 +50,7 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
                 );
 
                 map.put(
-                        Nation.TAURE_ARANOE,
+                        Nation.TAURE_ARANIE,
                         MarkerOptions.builder()
                                 .fillColor(new Color(ClaimsLookupV2.Color2NationLookup.TAURE_ARANIE_COLOR))
                                 .stroke(false)
@@ -65,41 +67,63 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
             }
     );
 
+    private static final Key CAPITAL_ICON_KEY = Key.of("capital");
+
     @Override
     public void onServerStarted(MinecraftServer server) {
         Squaremap api = SquaremapProvider.get();
         WorldIdentifier overworldID = WorldIdentifier.create(World.OVERWORLD.getValue().getNamespace(), World.OVERWORLD.getValue().getPath());
 
-
         ServerWorld gameWorld = server.getOverworld();
         final double worldSize = gameWorld.getWorldBorder().getSize();
 
         api.getWorldIfEnabled(overworldID).ifPresent(mapWorld -> {
-            Key key = Key.of("tnscore_nations_claims");
-            SimpleLayerProvider provider = SimpleLayerProvider.builder("Nation Claims")
-                    .showControls(true)
-                    .defaultHidden(true)
-                    .build();
-
-            mapWorld.layerRegistry().register(key, provider);
-            TNSCore.LOGGER.info("Registered squaremap layer");
-
-            MapImage image = MapInfo.lookupBiomeMap(ClaimsLookupV2.IMAGE_KEY);
-            MapInfo info = gameWorld.getRegistryManager()
-                    .getOrThrow(NovoAtlasResourceKeys.MAP_INFO)
-                    .getValueOrThrow(ClaimsLookupV2.OVERWORLD_MAP_INFO);
-
-            CompletableFuture.supplyAsync(() -> this.updateMarkers(provider, image, info, worldSize));
+            this.setClaimMarkers(mapWorld, server, worldSize);
+            // TODO: register icon markers
+//            this.setCapitalMarkers(mapWorld, server);
         });
     }
 
-    private CompletableFuture<Void> updateMarkers(
+    private void setClaimMarkers(MapWorld mapWorld, MinecraftServer server, double worldSize) {
+        Key key = Key.of("tnscore_nations_claims");
+        SimpleLayerProvider provider = SimpleLayerProvider.builder("Nation Claims")
+                .showControls(true)
+                .defaultHidden(true)
+                .build();
+
+        mapWorld.layerRegistry().register(key, provider);
+        TNSCore.LOGGER.info("Registered squaremap claims layer");
+
+        MapImage image = MapInfo.lookupBiomeMap(ClaimsLookupV2.IMAGE_KEY);
+        MapInfo info = server.getRegistryManager()
+                .getOrThrow(NovoAtlasResourceKeys.MAP_INFO)
+                .getValueOrThrow(ClaimsLookupV2.OVERWORLD_MAP_INFO);
+
+        CompletableFuture.supplyAsync(() -> this.updateClaimMarkers(provider, image, info, worldSize), server);
+    }
+
+    private void setCapitalMarkers(MapWorld mapWorld, MinecraftServer server) {
+        Key key = Key.of("tnscore_nations_capitals");
+        SimpleLayerProvider provider = SimpleLayerProvider.builder("Nation Capitals")
+                .showControls(true)
+                .defaultHidden(false)
+                .build();
+
+        mapWorld.layerRegistry().register(key, provider);
+        TNSCore.LOGGER.info("Registered squaremap capitals layer");
+
+        CompletableFuture.supplyAsync(() -> this.updateCapitalMarkers(provider), server);
+    }
+
+    private CompletableFuture<Void> updateClaimMarkers(
             SimpleLayerProvider provider,
             MapImage image,
             MapInfo info,
             double worldSize
     ) {
-        LOGGER.info("Updating map markers...");
+        LOGGER.info("Updating claim markers...");
+
+        Stopwatch timer = Stopwatch.createStarted();
 
         provider.clearMarkers();
         int worldRadius = ChunkSectionPos.getSectionCoord(worldSize) / 2;
@@ -128,7 +152,32 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
             }
         }
 
-        LOGGER.info("Updated map markers");
+        timer.stop();
+
+        LOGGER.info("Updated claimed markers in {}", timer);
+        return CompletableFuture.completedFuture(null);
+    }
+
+    private CompletableFuture<Void> updateCapitalMarkers(
+            SimpleLayerProvider provider
+    ) {
+        LOGGER.info("Updating capital markers...");
+
+        provider.clearMarkers();
+
+        for (Nation nation : Nation.values()) {
+            if (nation.isNotNationless()) {
+                Key key = Key.of(String.format("tnscore_claim_%s", nation.name()));
+
+                BlockPos home = nation.getData().home();
+
+                Point point = Point.of(home.getX(), home.getZ());
+                Icon marker = Marker.icon(point, CAPITAL_ICON_KEY, 16);
+
+                provider.addMarker(key, marker);
+            }
+        }
+
         return CompletableFuture.completedFuture(null);
     }
 }

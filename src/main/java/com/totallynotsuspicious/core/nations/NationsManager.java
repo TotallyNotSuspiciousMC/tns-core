@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.dialog.type.Dialog;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -16,19 +17,21 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 
 import java.util.Objects;
 
 public final class NationsManager {
-    private static final RegistryKey<Dialog> WELCOME_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("welcome"));
-    private static final RegistryKey<Dialog> JOIN_NATION_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("join_nation"));
-    private static final RegistryKey<Dialog> CONFIRM_NATIONLESS_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("confirm_nationless"));
+    public static final RegistryKey<Dialog> WELCOME_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("welcome"));
+    public static final RegistryKey<Dialog> JOIN_NATION_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("join_nation"));
+    public static final RegistryKey<Dialog> CONFIRM_NATIONLESS_DIALOG = RegistryKey.of(RegistryKeys.DIALOG, TNSCore.id("confirm_nationless"));
 
     public static void initialize() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             if (!PlayerNationComponent.get(handler.getPlayer()).isOnboarded()) {
                 openDialog(handler.getPlayer(), WELCOME_DIALOG);
+                handler.getPlayer().changeGameMode(GameMode.SPECTATOR);
                 TNSCore.LOGGER.info("Onboarding {} to nations", handler.getPlayer().getName());
             }
         });
@@ -74,6 +77,7 @@ public final class NationsManager {
     private static void joinNation(ServerPlayerEntity player, JoinNationPayload payload) {
         if (payload.nation() == Nation.NATIONLESS && !payload.confirmed()) {
             openDialog(player, CONFIRM_NATIONLESS_DIALOG);
+            return;
         } else if (PlayerNationComponent.get(player).tryJoinNation(payload.nation())) {
             TNSCore.LOGGER.info("Player {} joined nation {}", player.getName(), payload.nation());
         } else {
@@ -85,15 +89,20 @@ public final class NationsManager {
 
             player.sendMessage(Text.translatable("tnscore.nations.join.deny.tooOld").formatted(Formatting.RED));
         }
+        player.changeGameMode(GameMode.SURVIVAL);
     }
 
-    private static void openDialog(ServerPlayerEntity player, RegistryKey<Dialog> dialogKey) {
-        RegistryEntry<Dialog> dialog = Objects.requireNonNull(player.getServer())
-                .getRegistryManager()
-                .getOrThrow(RegistryKeys.DIALOG)
-                .getOrThrow(dialogKey);
+    public static void openDialog(ServerPlayerEntity player, RegistryKey<Dialog> dialogKey) {
+        RegistryEntry<Dialog> dialog = getEntry(
+                Objects.requireNonNull(player.getServer()).getRegistryManager(),
+                dialogKey
+        );
 
         player.openDialog(dialog);
+    }
+
+    public static RegistryEntry<Dialog> getEntry(DynamicRegistryManager registries, RegistryKey<Dialog> key) {
+        return registries.getOrThrow(RegistryKeys.DIALOG).getOrThrow(key);
     }
 
     private NationsManager() {

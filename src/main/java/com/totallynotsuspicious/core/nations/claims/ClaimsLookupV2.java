@@ -43,7 +43,7 @@ public final class ClaimsLookupV2 {
             return switch (color) {
                 case FIDELIS_COLOR -> Nation.FIDELIS;
                 case PANDORA_COLOR -> Nation.PANDORA;
-                case TAURE_ARANIE_COLOR -> Nation.TAURE_ARANOE;
+                case TAURE_ARANIE_COLOR -> Nation.TAURE_ARANIE;
                 case VAYUNE_COLOR -> Nation.VAYUNE;
                 default -> Nation.NATIONLESS;
             };

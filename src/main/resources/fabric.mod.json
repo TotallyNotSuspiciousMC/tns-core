@@ -43,8 +43,7 @@
 		"novoatlas": "*",
 		"cardinal-components-base": "*",
 		"fabric-permissions-api-v0": "*",
-		"placeholder-api": "*",
-		"squaremap": "*"
+		"placeholder-api": "*"
 	},
 	"suggests": {
 	},

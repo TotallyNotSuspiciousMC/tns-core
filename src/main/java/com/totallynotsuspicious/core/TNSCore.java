@@ -6,9 +6,11 @@ import com.totallynotsuspicious.core.entity.TNSLootModifiers;
 import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
 import com.totallynotsuspicious.core.nations.NationCommand;
 import com.totallynotsuspicious.core.nations.NationsManager;
+import com.totallynotsuspicious.core.nations.quiz.PersonalityQuizService;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,10 @@ public class TNSCore implements ModInitializer {
         TNSCorePlaceholders.initialize();
         CommandRegistrationCallback.EVENT.register(NationCommand::registerCommand);
         TNSLootModifiers.initialize();
-        ServerLifecycleEvents.SERVER_STARTED.register(new TNSCoreSquareMapMarkers());
+        if (FabricLoader.getInstance().isModLoaded("squaremap")) {
+            ServerLifecycleEvents.SERVER_STARTED.register(new TNSCoreSquareMapMarkers());
+        }
+        PersonalityQuizService.initialize();
     }
 
     public static Identifier id(String path) {

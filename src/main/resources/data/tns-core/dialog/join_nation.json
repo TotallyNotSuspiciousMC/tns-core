@@ -79,7 +79,11 @@
                     "color": "white",
                     "bold": true
                 }
-            ]
+            ],
+            "action": {
+                "type": "show_dialog",
+                "dialog": "tns-core:personality_quiz/confirm_start"
+            }
         },
         {
             "label": "Submit",

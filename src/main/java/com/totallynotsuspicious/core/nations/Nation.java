@@ -12,7 +12,7 @@ public enum Nation implements StringIdentifiable {
     NATIONLESS("nationless", NationData.NATIONLESS),
     FIDELIS("fidelis", NationData.FIDELIS),
     PANDORA("pandora", NationData.PANDORA),
-    TAURE_ARANOE("taure_aranie", NationData.TAURE_ARANIE),
+    TAURE_ARANIE("taure_aranie", NationData.TAURE_ARANIE),
     VAYUNE("vayune", NationData.VAYUNE);
 
     public static final Nation[] NATIONS = Arrays.stream(Nation.values())
@@ -37,6 +37,10 @@ public enum Nation implements StringIdentifiable {
 
     public Text getTitle() {
         return this.data.title();
+    }
+
+    public Text getDescription() {
+        return this.data.description();
     }
 
     public BlockPos getHome() {

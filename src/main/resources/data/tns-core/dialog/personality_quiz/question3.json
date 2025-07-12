@@ -1,0 +1,64 @@
+{
+    "type": "minecraft:notice",
+    "title": "How do you approach conflict in Minecraft?",
+    "can_close_with_escape": false,
+    "after_action": "wait_for_response",
+    "body": {
+        "type": "minecraft:plain_message",
+        "contents": [
+            "A - I try to play it sneaky, build traps, and catch people off-guard.\n",
+            "B - I run and hide.\n",
+            "C - I try to avoid direct confrontation, I prefer everyone to work out their differences by talking.\n",
+            "D - I jump straight to killing.\n"
+        ]
+    },
+    "inputs": [
+        {
+            "type": "minecraft:single_option",
+            "key": "answer",
+            "label": "",
+            "options": [
+                {
+                    "id": "invalid",
+                    "display": {
+                        "translate": "tnscore.nations.quiz.form.answer.select"
+                    },
+                    "initial": true
+                },
+                {
+                    "id": "pandora_answer",
+                    "display": {
+                        "translate": "tnscore.nations.quiz.form.answer.a"
+                    }
+                },
+                {
+                    "id": "taure_aranie_answer",
+                    "display": {
+                        "translate": "tnscore.nations.quiz.form.answer.b"
+                    }
+                },
+                {
+                    "id": "vayune_answer",
+                    "display": {
+                        "translate": "tnscore.nations.quiz.form.answer.c"
+                    }
+                },
+                {
+                    "id": "fidelis_answer",
+                    "display": {
+                        "translate": "tnscore.nations.quiz.form.answer.d"
+                    }
+                }
+            ]
+        }
+    ],
+    "action": {
+        "label": {
+            "translate": "tnscore.gui.submit"
+        },
+        "action": {
+            "type": "dynamic/custom",
+            "id": "tns-core-personality-quiz:conflict_approach"
+        }
+    }
+}
