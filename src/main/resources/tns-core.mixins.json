@@ -5,6 +5,7 @@
     "mixins": [
         "AnvilScreenHandlerMixin",
         "BlockItemMixin",
+        "EntityAccessor",
         "ServerCommonNetworkHandlerMixin",
         "ServerCommonNetworkHandlerMixin$ServerPlayNetworkHandlerMixin",
         "ShapedRecipeMixin",

@@ -12,6 +12,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.mojang.logging.LogUtils;
 import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
+import com.totallynotsuspicious.core.mixin.EntityAccessor;
 import com.totallynotsuspicious.core.nations.claims.ClaimsLookupV2;
 import com.totallynotsuspicious.core.world.NationClaimChunkComponent;
 import me.lucko.fabric.api.permissions.v0.Permissions;
@@ -50,6 +51,7 @@ public final class NationCommand {
     public static final Dynamic2CommandExceptionType UNKNOWN_PROPERTY_EXCEPTION = new Dynamic2CommandExceptionType(
             (claimedFor, alreadyClaimed) -> Text.translatable("tnscore.commands.nation.claim.fail", claimedFor, alreadyClaimed)
     );
+
     private static boolean hasManagePermission(ServerCommandSource src) {
         return src.hasPermissionLevel(3) || Permissions.check(src, "tnscore.nations.manage");
     }
@@ -136,13 +138,13 @@ public final class NationCommand {
 //                                        )
 //                                )
 //                        )
-                        .then(literal("query")
-                                .then(argument(posArg, BlockPosArgumentType.blockPos())
-                                        .executes(ctx -> executeQueryClaim(
-                                                ctx.getSource(),
-                                                BlockPosArgumentType.getBlockPos(ctx, posArg)
-                                        )))
-                        )
+                                .then(literal("query")
+                                        .then(argument(posArg, BlockPosArgumentType.blockPos())
+                                                .executes(ctx -> executeQueryClaim(
+                                                        ctx.getSource(),
+                                                        BlockPosArgumentType.getBlockPos(ctx, posArg)
+                                                )))
+                                )
                 );
 
         dispatcher.register(nation);
@@ -257,11 +259,10 @@ public final class NationCommand {
                 Optional<String> dimension = readView.getOptionalString("Dimension");
 
                 if (dimension.isPresent()) {
-                    ServerWorld world = server.getWorld(
-                            RegistryKey.of(RegistryKeys.WORLD, Identifier.tryParse(dimension.get())));
+                    ServerWorld world = server.getWorld(RegistryKey.of(RegistryKeys.WORLD, Identifier.tryParse(dimension.get())));
 
                     if (world != null) {
-                        requestedPlayer.setServerWorld(world);
+                        ((EntityAccessor) requestedPlayer).invokeSetWorld(world);
                     }
                 }
             }
