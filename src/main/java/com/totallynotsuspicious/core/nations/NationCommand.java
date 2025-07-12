@@ -169,19 +169,7 @@ public final class NationCommand {
 
     private static int executeHome(ServerCommandSource source, Nation nation) throws CommandSyntaxException {
         Entity entity = source.getEntityOrThrow();
-
-        Vec3d homePos = Vec3d.ofCenter(nation.getData().home());
-        entity.teleport(
-                source.getServer().getWorld(World.OVERWORLD),
-                homePos.x,
-                homePos.y,
-                homePos.z,
-                Set.of(),
-                0f,
-                0f,
-                true
-        );
-
+        nation.teleportToHome(entity);
         return Command.SINGLE_SUCCESS;
     }
 

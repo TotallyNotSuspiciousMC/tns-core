@@ -30,8 +30,9 @@ public final class NationsManager {
     public static void initialize() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             if (!PlayerNationComponent.get(handler.getPlayer()).isOnboarded()) {
-                openDialog(handler.getPlayer(), WELCOME_DIALOG);
                 handler.getPlayer().changeGameMode(GameMode.SPECTATOR);
+                openDialog(handler.getPlayer(), WELCOME_DIALOG);
+
                 TNSCore.LOGGER.info("Onboarding {} to nations", handler.getPlayer().getName());
             }
         });

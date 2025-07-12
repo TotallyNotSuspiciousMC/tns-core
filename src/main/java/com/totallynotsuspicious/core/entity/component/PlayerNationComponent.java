@@ -13,6 +13,7 @@ import org.ladysnake.cca.api.v3.component.Component;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 public class PlayerNationComponent implements Component {
     private static final String TIME_JOINED_NATION_KEY = "time_joined_first_nation";
@@ -44,6 +45,8 @@ public class PlayerNationComponent implements Component {
         }
         this.onboarded = true;
         this.nation = nation;
+
+        this.player.getWaypointConfig().color = Optional.ofNullable(this.nation.getData().color().getColorValue());
     }
 
     public boolean tryJoinNation(Nation nation) {

@@ -1,11 +1,16 @@
 package com.totallynotsuspicious.core.nations;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.Set;
 
 public enum Nation implements StringIdentifiable {
 
@@ -57,6 +62,20 @@ public enum Nation implements StringIdentifiable {
 
     public boolean isNotNationless() {
         return this != NATIONLESS;
+    }
+
+    public void teleportToHome(Entity entity) {
+        Vec3d homePos = Vec3d.ofCenter(this.getData().home());
+        entity.teleport(
+                Objects.requireNonNull(entity.getServer()).getOverworld(),
+                homePos.x,
+                homePos.y,
+                homePos.z,
+                Set.of(),
+                0f,
+                0f,
+                true
+        );
     }
 
     public Text getJoinMessage() {
