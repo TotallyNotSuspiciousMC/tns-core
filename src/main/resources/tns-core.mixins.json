@@ -6,6 +6,8 @@
         "AnvilScreenHandlerMixin",
         "BlockItemMixin",
         "EntityAccessor",
+        "PlayerManagerAccesor",
+        "PlayerSaveHandlerAccessor",
         "ServerCommonNetworkHandlerMixin",
         "ServerCommonNetworkHandlerMixin$ServerPlayNetworkHandlerMixin",
         "ShapedRecipeMixin",

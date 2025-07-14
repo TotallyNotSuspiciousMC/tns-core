@@ -11,8 +11,11 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.mojang.logging.LogUtils;
+import com.totallynotsuspicious.core.TNSCore;
 import com.totallynotsuspicious.core.entity.component.PlayerNationComponent;
 import com.totallynotsuspicious.core.mixin.EntityAccessor;
+import com.totallynotsuspicious.core.mixin.PlayerManagerAccesor;
+import com.totallynotsuspicious.core.mixin.PlayerSaveHandlerAccessor;
 import com.totallynotsuspicious.core.nations.claims.ClaimsLookupV2;
 import com.totallynotsuspicious.core.world.NationClaimChunkComponent;
 import me.lucko.fabric.api.permissions.v0.Permissions;
@@ -21,6 +24,9 @@ import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.command.argument.GameProfileArgumentType;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.NbtSizeTracker;
 import net.minecraft.network.packet.c2s.common.SyncedClientOptions;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -29,20 +35,26 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.NbtReadView;
 import net.minecraft.storage.ReadView;
 import net.minecraft.text.Text;
 import net.minecraft.util.ErrorReporter;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.PlayerSaveHandler;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Set;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -117,6 +129,17 @@ public final class NationCommand {
                                 ctx.getSource(),
                                 PlayerNationComponent.get(ctx.getSource().getPlayerOrThrow()).getNation()
                         ))
+                )
+                .then(literal("count")
+                        .requires(NationCommand::hasManagePermission)
+                        .executes(ctx -> {
+                            try {
+                                return executeCountAllNations(ctx.getSource());
+                            } catch (Exception e) {
+                                TNSCore.LOGGER.error("Error while counting nations", e);
+                                throw new RuntimeException(e);
+                            }
+                        })
                 )
                 .then(literal("claim")
 //                        .requires(NationCommand::hasManagePermission)
@@ -269,6 +292,56 @@ public final class NationCommand {
         }
 
         return requestedPlayer;
+    }
+
+    private static int executeCountAllNations(ServerCommandSource source) throws IOException {
+        MinecraftServer server = source.getServer();
+
+        PlayerSaveHandler saveHandler = ((PlayerManagerAccesor) server.getPlayerManager()).getSaveHandler();
+        Path saveFilePath = ((PlayerSaveHandlerAccessor) saveHandler).getPlayerDataDir().toPath();
+
+        Map<Nation, Long> counts;
+        try (
+                Stream<Path> files = Files.list(saveFilePath);
+                ErrorReporter.Logging errorReporter = new ErrorReporter.Logging(TNSCore.LOGGER)
+        ) {
+            counts = files.filter(path -> !path.endsWith(".dat_old"))
+                    .map(path -> {
+                        try {
+                            return NbtIo.readCompressed(path, NbtSizeTracker.ofUnlimitedBytes());
+                        } catch (IOException e) {
+                            throw new UncheckedIOException(e);
+                        }
+                    })
+                    .map(nbt -> NbtReadView.create(errorReporter, server.getRegistryManager(), nbt))
+                    .map(view -> view.getReadView("cardinal_components").getReadView("tns-core:player_nation"))
+                    .map(view -> view.read("nation", Nation.CODEC).orElse(Nation.NATIONLESS))
+                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        }
+
+        long total = counts.values().stream().mapToLong(l -> l).sum();
+
+        if (total == 0) {
+            source.sendError(Text.translatable("tnscore.commands.nation.count.error"));
+            return 0;
+        }
+
+        for (Map.Entry<Nation, Long> count : counts.entrySet()) {
+            long value = count.getValue();
+            String percentage = String.format("%.2f", (double) value / total * 100);
+
+            source.sendFeedback(
+                    () -> Text.translatable(
+                            "tnscore.commands.nation.count.entry",
+                            count.getKey().getTitle(),
+                            value,
+                            percentage
+                    ),
+                    false
+            );
+        }
+
+        return (int) total;
     }
 
     private NationCommand() {
