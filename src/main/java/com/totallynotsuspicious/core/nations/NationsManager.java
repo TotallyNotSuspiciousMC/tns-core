@@ -34,6 +34,7 @@ public final class NationsManager {
                 openDialog(handler.getPlayer(), WELCOME_DIALOG);
 
                 TNSCore.LOGGER.info("Onboarding {} to nations", handler.getPlayer().getName());
+                server.getPlayerManager().broadcast(Text.translatable("tnscore.message.welcome", handler.getPlayer().getDisplayName()), false);
             }
         });
 
@@ -70,7 +71,7 @@ public final class NationsManager {
             player.sendMessage(
                     Text.translatable("tnscore.nations.claimedChunk", claimedNation.getTitle())
                             .formatted(Formatting.RED),
-                    false
+                    true
             );
         }
     }

@@ -1,4 +1,5 @@
 {
+    "tnscore.message.welcome": "Welcome %s to TotallyNotSuspicious!",
     "tnscore.commands.nation.reset.success": "Reset nations for %s",
     "tnscore.commands.nation.set.success": "Set nation for %s to %s",
     "tnscore.commands.nation.get": "%s is a citizen of %s",
