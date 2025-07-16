@@ -3,11 +3,9 @@ package com.totallynotsuspicious.core.nations;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.mojang.logging.LogUtils;
@@ -19,6 +17,7 @@ import com.totallynotsuspicious.core.mixin.PlayerSaveHandlerAccessor;
 import com.totallynotsuspicious.core.nations.claims.ClaimsLookupV2;
 import com.totallynotsuspicious.core.world.NationClaimChunkComponent;
 import me.lucko.fabric.api.permissions.v0.Permissions;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -40,19 +39,20 @@ import net.minecraft.storage.ReadView;
 import net.minecraft.text.Text;
 import net.minecraft.util.ErrorReporter;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.UserCache;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.PlayerSaveHandler;
-import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -300,24 +300,42 @@ public final class NationCommand {
         PlayerSaveHandler saveHandler = ((PlayerManagerAccesor) server.getPlayerManager()).getSaveHandler();
         Path saveFilePath = ((PlayerSaveHandlerAccessor) saveHandler).getPlayerDataDir().toPath();
 
-        Map<Nation, Long> counts;
+
+
+        Map<UUID, Nation> playerNations = new HashMap<>();
         try (
                 Stream<Path> files = Files.list(saveFilePath);
                 ErrorReporter.Logging errorReporter = new ErrorReporter.Logging(TNSCore.LOGGER)
         ) {
-            counts = files.filter(path -> !path.endsWith(".dat_old"))
-                    .map(path -> {
-                        try {
-                            return NbtIo.readCompressed(path, NbtSizeTracker.ofUnlimitedBytes());
-                        } catch (IOException e) {
-                            throw new UncheckedIOException(e);
-                        }
-                    })
-                    .map(nbt -> NbtReadView.create(errorReporter, server.getRegistryManager(), nbt))
-                    .map(view -> view.getReadView("cardinal_components").getReadView("tns-core:player_nation"))
-                    .map(view -> view.read("nation", Nation.CODEC).orElse(Nation.NATIONLESS))
-                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            for (Path path : files.toList()) {
+                String fileName = path.toString();
+                if (fileName.endsWith(".dat_old")) {
+                    continue;
+                }
+
+                UUID uuid = UUID.fromString(FilenameUtils.getBaseName(fileName));
+                NbtCompound nbt = NbtIo.readCompressed(path, NbtSizeTracker.ofUnlimitedBytes());
+
+                ReadView readView = NbtReadView.create(errorReporter, server.getRegistryManager(), nbt);
+                Nation nation = readView
+                        .getReadView("cardinal_components")
+                        .getReadView("tns-core:player_nation")
+                        .read("nation", Nation.CODEC)
+                        .orElse(Nation.NATIONLESS);
+
+                playerNations.put(uuid, nation);
+            }
+
+            // ensures that any online players that havent had their save files updated yet are included too
+            for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                PlayerNationComponent component = PlayerNationComponent.get(player);
+                playerNations.put(player.getUuid(), component.getNation());
+            }
         }
+
+        Map<Nation, Long> counts = playerNations.entrySet()
+                .stream()
+                .collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.counting()));
 
         long total = counts.values().stream().mapToLong(l -> l).sum();
 
@@ -341,7 +359,31 @@ public final class NationCommand {
             );
         }
 
+        dumpNationsPlayerList(playerNations, server.getUserCache());
+        source.sendFeedback(() -> Text.literal("Dumped player nation list."), false);
+
         return (int) total;
+    }
+
+    private static void dumpNationsPlayerList(Map<UUID, Nation> playerNations, UserCache userCache) {
+        var fileContents = new StringJoiner("\n");
+        fileContents.add("uuid,name,nation");
+
+        for (Map.Entry<UUID, Nation> entry : playerNations.entrySet()) {
+            String playerName = userCache.getByUuid(entry.getKey()).map(GameProfile::getName).orElse("[UNKNOWN NAME]");
+
+            fileContents.add(String.format("%s,%s,%s", entry.getKey(), playerName, entry.getValue()));
+        }
+
+        Thread.ofVirtual().start(() -> {
+            Path output = FabricLoader.getInstance().getGameDir().resolve("player_nations_list.csv");
+            try {
+                Files.writeString(output, fileContents.toString());
+                TNSCore.LOGGER.info("Dumped player list to {}", output);
+            } catch (IOException e) {
+                TNSCore.LOGGER.error("Unable to dump player nation list", e);
+            }
+        });
     }
 
     private NationCommand() {
