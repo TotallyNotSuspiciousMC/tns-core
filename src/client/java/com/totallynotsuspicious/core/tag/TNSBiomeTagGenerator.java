@@ -1,4 +1,4 @@
-package com.totallynotsuspicious.core;
+package com.totallynotsuspicious.core.tag;
 
 import com.totallynotsuspicious.core.registry.TNSBiomeKeys;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

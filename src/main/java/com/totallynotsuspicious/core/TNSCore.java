@@ -3,6 +3,7 @@ package com.totallynotsuspicious.core;
 import com.totallynotsuspicious.core.compat.TNSCorePlaceholders;
 import com.totallynotsuspicious.core.compat.TNSCoreSquareMapMarkers;
 import com.totallynotsuspicious.core.entity.TNSLootModifiers;
+import com.totallynotsuspicious.core.item.TNSCoreItems;
 import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
 import com.totallynotsuspicious.core.nations.NationCommand;
 import com.totallynotsuspicious.core.nations.NationsManager;
@@ -31,6 +32,7 @@ public class TNSCore implements ModInitializer {
             ServerLifecycleEvents.SERVER_STARTED.register(new TNSCoreSquareMapMarkers());
         }
         PersonalityQuizService.initialize();
+        TNSCoreItems.initialize();
     }
 
     public static Identifier id(String path) {

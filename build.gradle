@@ -70,6 +70,8 @@ dependencies {
 
 	modCompileOnly("xyz.jpenilla:squaremap-api:${project.squaremap_version}")
 
+	modImplementation "eu.pb4:polymer-core:${project.polymer_version}"
+
 	// TODO: repalce with modrinth maven when approved
 	modImplementation "curse.maven:novoatlas-1297254:6711321"
 }

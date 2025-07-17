@@ -1,4 +1,4 @@
-package com.totallynotsuspicious.core;
+package com.totallynotsuspicious.core.tag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
