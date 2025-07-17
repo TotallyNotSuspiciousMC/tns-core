@@ -1,5 +1,6 @@
 package com.totallynotsuspicious.core.data;
 
+import com.totallynotsuspicious.core.item.TNSCoreItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.recipe.RecipeExporter;
@@ -60,6 +61,12 @@ public class TNSRecipeGenerator extends FabricRecipeProvider {
                         .input('#', ItemTags.WOOL)
                         .input('N', Items.NAUTILUS_SHELL)
                         .input('F', Items.PUFFERFISH)
+                        .offerTo(exporter);
+
+                createShapeless(RecipeCategory.MISC, TNSCoreItems.TREE_BANNER_PATTERN)
+                        .criterion("has_saplings", conditionsFromTag(ItemTags.SAPLINGS))
+                        .input(ItemTags.SAPLINGS)
+                        .input(Items.PAPER)
                         .offerTo(exporter);
             }
         };

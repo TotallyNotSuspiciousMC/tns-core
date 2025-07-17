@@ -1,9 +1,10 @@
 package com.totallynotsuspicious.core.item;
 
 import com.totallynotsuspicious.core.TNSCore;
-import eu.pb4.polymer.core.api.item.SimplePolymerItem;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -24,6 +25,10 @@ public final class TNSCoreItems {
 
     public static void initialize() {
         TNSCore.LOGGER.debug("Initialized TNS items");
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(fabricItemGroupEntries -> {
+            fabricItemGroupEntries.add(TREE_BANNER_PATTERN);
+        });
     }
 
     private static Item registerSimple(String name, Item clientItem, Consumer<Item.Settings> settingsBuilder) {
