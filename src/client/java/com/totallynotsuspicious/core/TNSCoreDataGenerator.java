@@ -1,11 +1,12 @@
 package com.totallynotsuspicious.core;
 
+import com.totallynotsuspicious.core.asset.TNSItemModelGenerator;
 import com.totallynotsuspicious.core.tag.TNSBannerPatternTagGenerator;
 import com.totallynotsuspicious.core.tag.TNSBiomeTagGenerator;
 import com.totallynotsuspicious.core.tag.TNSEntityTypeTagGenerator;
-import com.totallynotsuspicious.core.value.TNSBannerPatternGenerator;
-import com.totallynotsuspicious.core.value.TNSBiomeGenerator;
-import com.totallynotsuspicious.core.value.TNSRecipeGenerator;
+import com.totallynotsuspicious.core.data.TNSBannerPatternGenerator;
+import com.totallynotsuspicious.core.data.TNSBiomeGenerator;
+import com.totallynotsuspicious.core.data.TNSRecipeGenerator;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
@@ -20,5 +21,6 @@ public class TNSCoreDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(TNSEntityTypeTagGenerator::new);
 		pack.addProvider(TNSBannerPatternGenerator::new);
 		pack.addProvider(TNSBannerPatternTagGenerator::new);
+//		pack.addProvider(TNSItemModelGenerator::new);
 	}
 }

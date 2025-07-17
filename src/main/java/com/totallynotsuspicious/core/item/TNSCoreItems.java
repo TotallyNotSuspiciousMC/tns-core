@@ -14,7 +14,7 @@ import net.minecraft.util.Rarity;
 import java.util.function.Consumer;
 
 public final class TNSCoreItems {
-    public static final Item TREE_BANNER_PATTRN = registerSimple(
+    public static final Item TREE_BANNER_PATTERN = registerSimple(
             "tree_banner_pattern",
             Items.MOJANG_BANNER_PATTERN,
             settings -> settings.maxCount(1)
@@ -32,7 +32,7 @@ public final class TNSCoreItems {
                 .registryKey(key);
         settingsBuilder.accept(settings);
 
-        return Registry.register(Registries.ITEM, key, new SimplePolymerItem(settings, clientItem));
+        return Registry.register(Registries.ITEM, key, new DefaultedModelPolymerItem(settings, clientItem));
     }
 
 

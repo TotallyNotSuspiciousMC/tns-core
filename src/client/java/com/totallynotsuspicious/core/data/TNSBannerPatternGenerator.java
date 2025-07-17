@@ -1,4 +1,4 @@
-package com.totallynotsuspicious.core.value;
+package com.totallynotsuspicious.core.data;
 
 import com.totallynotsuspicious.core.TNSCore;
 import com.totallynotsuspicious.core.item.TNSBannerPatterns;

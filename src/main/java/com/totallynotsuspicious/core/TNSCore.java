@@ -8,6 +8,7 @@ import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
 import com.totallynotsuspicious.core.nations.NationCommand;
 import com.totallynotsuspicious.core.nations.NationsManager;
 import com.totallynotsuspicious.core.nations.quiz.PersonalityQuizService;
+import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -23,6 +24,10 @@ public class TNSCore implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        if (!PolymerResourcePackUtils.addModAssets(MOD_ID)) {
+            LOGGER.error("Unable to construct Polymer mod assets for {}", MOD_ID);
+        }
+
         NationsManager.initialize();
         CustomEventHandlerRegistry.initialize();
         TNSCorePlaceholders.initialize();
