@@ -5,13 +5,13 @@
 	"name": "TNS Core",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"TheDeathlyCow"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "LGPL-3.0",
+	"license": "AGPL-3.0-or-later",
 	"icon": "assets/tns-core/icon.png",
 	"environment": "*",
 	"entrypoints": {
