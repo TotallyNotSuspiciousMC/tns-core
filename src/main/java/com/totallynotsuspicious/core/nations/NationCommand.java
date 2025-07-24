@@ -46,11 +46,8 @@ import net.minecraft.world.chunk.Chunk;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -176,7 +173,7 @@ public final class NationCommand {
     private static int executeQueryClaim(ServerCommandSource source, BlockPos pos) {
         Nation claimed = ClaimsLookupV2.getClaimedNation(source.getWorld(), pos);
 
-        if (claimed.isNotNationless()) {
+        if (claimed.canMakeClaims()) {
             source.sendFeedback(() -> Text.translatable("tnscore.commands.nation.claim.query.claimed", claimed.getTitle()), false);
         } else {
             source.sendFeedback(() -> Text.translatable("tnscore.commands.nation.claim.query.nationless"), false);

@@ -67,7 +67,7 @@ public final class NationsManager {
 
         PlayerNationComponent nationComponent = PlayerNationComponent.get(player);
         Nation claimedNation = ClaimsLookupV2.getClaimedNation(world, pos);
-        if (claimedNation.isNotNationless() && claimedNation != nationComponent.getNation()) {
+        if (claimedNation.canMakeClaims() && claimedNation != nationComponent.getNation()) {
             player.sendMessage(
                     Text.translatable("tnscore.nations.claimedChunk", claimedNation.getTitle())
                             .formatted(Formatting.RED),
@@ -77,7 +77,7 @@ public final class NationsManager {
     }
 
     private static void joinNation(ServerPlayerEntity player, JoinNationPayload payload) {
-        if (payload.nation() == Nation.NATIONLESS && !payload.confirmed()) {
+        if (payload.nation().isNationless() && !payload.confirmed()) {
             openDialog(player, CONFIRM_NATIONLESS_DIALOG);
             return;
         } else if (PlayerNationComponent.get(player).tryJoinNation(payload.nation())) {

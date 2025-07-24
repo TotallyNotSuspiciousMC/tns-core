@@ -38,6 +38,7 @@ public final class ClaimsLookupV2 {
         public static final int PANDORA_COLOR = 0xffff00;
         public static final int TAURE_ARANIE_COLOR = 0x00ff00;
         public static final int VAYUNE_COLOR = 0x0000ff;
+        public static final int NO_MANS_LAND_COLOR = 0x000000;
 
         public static Nation getNation(int color) {
             return switch (color) {
@@ -45,6 +46,7 @@ public final class ClaimsLookupV2 {
                 case PANDORA_COLOR -> Nation.PANDORA;
                 case TAURE_ARANIE_COLOR -> Nation.TAURE_ARANIE;
                 case VAYUNE_COLOR -> Nation.VAYUNE;
+                case NO_MANS_LAND_COLOR -> Nation.NO_MANS_LAND;
                 default -> Nation.NATIONLESS;
             };
         }

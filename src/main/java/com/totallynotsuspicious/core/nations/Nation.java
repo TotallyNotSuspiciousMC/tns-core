@@ -6,7 +6,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -18,7 +17,8 @@ public enum Nation implements StringIdentifiable {
     FIDELIS("fidelis", NationData.FIDELIS),
     PANDORA("pandora", NationData.PANDORA),
     TAURE_ARANIE("taure_aranie", NationData.TAURE_ARANIE),
-    VAYUNE("vayune", NationData.VAYUNE);
+    VAYUNE("vayune", NationData.VAYUNE),
+    NO_MANS_LAND("no_mans_land", NationData.NO_MANS_LAND);
 
     public static final Nation[] NATIONS = Arrays.stream(Nation.values())
             .filter(Nation::isNotNationless)
@@ -57,10 +57,18 @@ public enum Nation implements StringIdentifiable {
     }
 
     public boolean isNationless() {
-        return this == NATIONLESS;
+        return this == NATIONLESS || this == NO_MANS_LAND;
+    }
+
+    public boolean isJoinable() {
+        return this != NO_MANS_LAND;
     }
 
     public boolean isNotNationless() {
+        return !isNationless();
+    }
+
+    public boolean canMakeClaims() {
         return this != NATIONLESS;
     }
 

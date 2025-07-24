@@ -40,6 +40,10 @@ public class PlayerNationComponent implements Component {
     }
 
     public void joinNation(Nation nation) {
+        if (!nation.isJoinable()) {
+            throw new IllegalArgumentException("The nation " + nation + " is not joinable");
+        }
+
         if (!this.onboarded || this.timeJoinedFirstNation == null) {
             this.timeJoinedFirstNation = Instant.now();
         }

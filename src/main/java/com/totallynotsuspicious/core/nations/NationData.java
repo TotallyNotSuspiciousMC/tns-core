@@ -44,4 +44,11 @@ public record NationData(
             Formatting.AQUA,
             new BlockPos(2198, 96, 830)
     );
+
+    public static final NationData NO_MANS_LAND = new NationData(
+            Text.literal("No Man's Land").formatted(Formatting.BLACK, Formatting.ITALIC),
+            Text.translatable("tnscore.nation.vayune.desc"),
+            Formatting.BLACK,
+            NATIONLESS.home()
+    );
 }

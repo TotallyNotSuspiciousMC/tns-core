@@ -37,6 +37,7 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
                         Nation.FIDELIS,
                         MarkerOptions.builder()
                                 .fillColor(new Color(ClaimsLookupV2.Color2NationLookup.FIDELIS_COLOR))
+                                .fillOpacity(0.5f)
                                 .stroke(false)
                                 .build()
                 );
@@ -45,6 +46,7 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
                         Nation.PANDORA,
                         MarkerOptions.builder()
                                 .fillColor(new Color(ClaimsLookupV2.Color2NationLookup.PANDORA_COLOR))
+                                .fillOpacity(0.5f)
                                 .stroke(false)
                                 .build()
                 );
@@ -53,6 +55,7 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
                         Nation.TAURE_ARANIE,
                         MarkerOptions.builder()
                                 .fillColor(new Color(ClaimsLookupV2.Color2NationLookup.TAURE_ARANIE_COLOR))
+                                .fillOpacity(0.5f)
                                 .stroke(false)
                                 .build()
                 );
@@ -61,7 +64,17 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
                         Nation.VAYUNE,
                         MarkerOptions.builder()
                                 .fillColor(new Color(0x95f4fc))
+                                .fillOpacity(0.5f)
                                 .stroke(false)
+                                .build()
+                );
+
+                map.put(
+                        Nation.NO_MANS_LAND,
+                        MarkerOptions.builder()
+                                .fillColor(new Color(ClaimsLookupV2.Color2NationLookup.NO_MANS_LAND_COLOR))
+                                .fillOpacity(0.5f)
+                                .strokeColor(new Color(0xff0000))
                                 .build()
                 );
             }
@@ -134,7 +147,7 @@ public class TNSCoreSquareMapMarkers implements ServerLifecycleEvents.ServerStar
                 Nation nation = ClaimsLookupV2.Color2NationLookup.getNation(claimedNationColor);
                 MarkerOptions options = NATION_MARKER_OPTIONS.get(nation);
 
-                if (nation.isNotNationless() && options != null) {
+                if (options != null) {
                     Key key = Key.of(String.format("tnscore_claim_%s_%d_%d", nation.name(), x, z));
 
                     int blockX = ChunkSectionPos.getBlockCoord(x);
