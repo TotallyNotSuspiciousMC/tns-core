@@ -13,6 +13,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Rarity;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public final class TNSCoreItems {
     public static final Item TREE_BANNER_PATTERN = registerSimple(
@@ -23,23 +24,41 @@ public final class TNSCoreItems {
                     .component(DataComponentTypes.PROVIDES_BANNER_PATTERNS, TNSBannerPatternTags.TREE_PATTERN_ITEM)
     );
 
+    public static final Item HAPPY_GHAST_TREAT = register(
+            "happy_ghast_treat",
+            settings -> new HappyGhastTreatItem(
+                    settings.maxCount(16).rarity(Rarity.COMMON),
+                    Items.SNOWBALL
+            )
+    );
+
     public static void initialize() {
         TNSCore.LOGGER.debug("Initialized TNS items");
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(fabricItemGroupEntries -> {
             fabricItemGroupEntries.add(TREE_BANNER_PATTERN);
         });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(fabricItemGroupEntries -> {
+            fabricItemGroupEntries.add(HAPPY_GHAST_TREAT);
+        });
     }
 
-    private static Item registerSimple(String name, Item clientItem, Consumer<Item.Settings> settingsBuilder) {
+    private static Item register(String name, Function<Item.Settings, Item> settingsBuilder) {
         RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, TNSCore.id(name));
         Item.Settings settings = new Item.Settings()
                 .registryKey(key);
-        settingsBuilder.accept(settings);
+        Item item = settingsBuilder.apply(settings);
 
-        return Registry.register(Registries.ITEM, key, new DefaultedModelPolymerItem(settings, clientItem));
+        return Registry.register(Registries.ITEM, key, item);
     }
 
+    private static Item registerSimple(String name, Item clientItem, Consumer<Item.Settings> settingsBuilder) {
+        return register(name, settings -> {
+            settingsBuilder.accept(settings);
+            return new DefaultedModelPolymerItem(settings, clientItem);
+        });
+    }
 
     private TNSCoreItems() {
 

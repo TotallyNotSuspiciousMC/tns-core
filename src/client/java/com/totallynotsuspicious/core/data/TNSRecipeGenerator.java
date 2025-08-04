@@ -68,6 +68,13 @@ public class TNSRecipeGenerator extends FabricRecipeProvider {
                         .input(ItemTags.SAPLINGS)
                         .input(Items.PAPER)
                         .offerTo(exporter);
+
+                createShapeless(RecipeCategory.MISC, TNSCoreItems.HAPPY_GHAST_TREAT)
+                        .criterion(hasItem(Items.SNOWBALL), conditionsFromItem(Items.SNOWBALL))
+                        .input(Items.SNOWBALL)
+                        .input(Items.AMETHYST_SHARD)
+                        .input(Items.SUGAR)
+                        .offerTo(exporter);
             }
         };
     }
