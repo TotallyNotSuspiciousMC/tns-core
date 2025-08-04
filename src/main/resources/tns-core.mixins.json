@@ -8,6 +8,7 @@
         "EntityAccessor",
         "PlayerManagerAccesor",
         "PlayerSaveHandlerAccessor",
+        "SculkBlockMixin",
         "ServerCommonNetworkHandlerMixin",
         "ServerCommonNetworkHandlerMixin$ServerPlayNetworkHandlerMixin",
         "ShapedRecipeMixin",
