@@ -1,7 +1,6 @@
 package com.totallynotsuspicious.core.entity;
 
 import com.totallynotsuspicious.core.TNSCore;
-import com.totallynotsuspicious.core.item.HappyGhastTreatItem;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
@@ -16,7 +15,7 @@ public final class TNSCoreStatusEffects {
             new SimplePolymerStatusEffect(StatusEffectCategory.BENEFICIAL, 0x42f5f5)
                     .addAttributeModifier(
                             EntityAttributes.FLYING_SPEED,
-                            HappyGhastTreatItem.EXTRA_SPEED_BOOST,
+                            TNSCore.id("extra_speed_boost"),
                             1.0,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                     )

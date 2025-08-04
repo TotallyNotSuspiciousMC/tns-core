@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tns-core:item/happy_ghast_treat"
+  }
+}
