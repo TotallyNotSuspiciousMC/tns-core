@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.totallynotsuspicious.core.compat.TNSCorePlaceholders;
 import com.totallynotsuspicious.core.compat.TNSCoreSquareMapMarkers;
+import com.totallynotsuspicious.core.entity.TNSCoreStatusEffects;
 import com.totallynotsuspicious.core.entity.TNSLootModifiers;
 import com.totallynotsuspicious.core.item.TNSCoreItems;
 import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
@@ -53,6 +54,7 @@ public class TNSCore implements ModInitializer {
         }
         PersonalityQuizService.initialize();
         TNSCoreItems.initialize();
+        TNSCoreStatusEffects.initialize();
     }
 
     public static Identifier id(String path) {

@@ -1,10 +1,12 @@
 package com.totallynotsuspicious.core.item;
 
 import com.totallynotsuspicious.core.TNSCore;
+import com.totallynotsuspicious.core.entity.TNSCoreStatusEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.passive.HappyGhastEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -20,6 +22,7 @@ public class HappyGhastTreatItem extends DefaultedModelPolymerItem {
     private static final double BOOST_PER_TREAT = 0.1;
     private static final double MAX_BOOST = 0.5;
     private static final Identifier BASE_SPEED_BOOST = TNSCore.id("base_speed_boost");
+    public static final Identifier EXTRA_SPEED_BOOST = TNSCore.id("extra_speed_boost");
 
     public HappyGhastTreatItem(Settings settings, Item polymerItem) {
         super(settings, polymerItem);
@@ -41,7 +44,14 @@ public class HappyGhastTreatItem extends DefaultedModelPolymerItem {
             speed = MathHelper.clamp(speed + BOOST_PER_TREAT, 0, MAX_BOOST);
 
             if (applyEffect) {
-                
+                happyGhast.addStatusEffect(
+                        new StatusEffectInstance(
+                                TNSCoreStatusEffects.SWIFT_FLIGHT,
+                                30 * 20,
+                                0
+                        ),
+                        user
+                );
             } else {
                 if (baseModifier != null) {
                     flyingSpeed.removeModifier(baseModifier);
