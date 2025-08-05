@@ -16,7 +16,7 @@ public final class TNSCoreStatusEffects {
                     .addAttributeModifier(
                             EntityAttributes.FLYING_SPEED,
                             TNSCore.id("extra_speed_boost"),
-                            1.0,
+                            0.5,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                     )
     );

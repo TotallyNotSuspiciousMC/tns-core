@@ -1,0 +1,34 @@
+{
+    "anvil_cost": 2,
+    "description": {
+        "translate": "enchantment.tnscore.air_speed"
+    },
+    "effects": {
+        "minecraft:attributes": [
+            {
+                "amount": {
+                    "type": "minecraft:linear",
+                    "base": 0.1,
+                    "per_level_above_first": 0.1
+                },
+                "attribute": "minecraft:flying_speed",
+                "id": "tns-core:enchantment.air_speed",
+                "operation": "add_multiplied_total"
+            }
+        ]
+    },
+    "max_cost": {
+        "base": 18,
+        "per_level_above_first": 8
+    },
+    "max_level": 5,
+    "min_cost": {
+        "base": 10,
+        "per_level_above_first": 8
+    },
+    "slots": [
+        "body"
+    ],
+    "supported_items": "#minecraft:harnesses",
+    "weight": 5
+}
