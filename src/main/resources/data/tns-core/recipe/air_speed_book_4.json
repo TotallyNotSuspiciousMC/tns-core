@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        "minecraft:book",
+        "tns-core:enchanted_happy_ghast_treat",
+        "tns-core:enchanted_happy_ghast_treat",
+        "tns-core:enchanted_happy_ghast_treat",
+        "tns-core:enchanted_happy_ghast_treat"
+    ],
+    "result": {
+        "components": {
+            "minecraft:enchantments": {
+                "tns-core:air_speed": 4
+            }
+        },
+        "count": 1,
+        "id": "minecraft:enchanted_book"
+    }
+}

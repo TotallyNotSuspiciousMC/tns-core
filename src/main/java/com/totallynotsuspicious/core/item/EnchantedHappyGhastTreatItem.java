@@ -67,8 +67,7 @@ public class EnchantedHappyGhastTreatItem extends SimplePolymerItem {
         happyGhast.addStatusEffect(
                 new StatusEffectInstance(
                         TNSCoreStatusEffects.SWIFT_FLIGHT,
-                        8 * 60 * 20,
-                        0
+                        30 * 20
                 ),
                 user
         );
