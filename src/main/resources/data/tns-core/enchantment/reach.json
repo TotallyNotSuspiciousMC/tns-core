@@ -1,0 +1,44 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.tnscore.reach"
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 1,
+          "per_level_above_first": 1
+        },
+        "attribute": "minecraft:block_interaction_range",
+        "id": "tns-core:enchantment.block_reach",
+        "operation": "add_value"
+      },
+      {
+        "attribute": "minecraft:entity_interaction_range",
+        "id": "tns-core:enchantment.entity_reach",
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.25,
+          "per_level_above_first": 0.25
+        },
+        "operation": "add_value"
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 18,
+    "per_level_above_first": 8
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 8
+  },
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#c:tools",
+  "weight": 5
+}
