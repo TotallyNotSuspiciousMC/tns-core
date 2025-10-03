@@ -49,16 +49,38 @@ public final class TNSCoreItems {
             )
     );
 
+    public static final Item RESIN_CANDY = register(
+            "resin_candy",
+            settings -> new ResinCandyItem(settings
+                    .maxCount(16)
+                    .rarity(Rarity.COMMON)
+                    .component(DataComponentTypes.LORE, new LoreComponent(
+                            List.of(Text.translatable("item.tns-core.resin_treat.tooltip[0]"), Text.translatable("item.tns-core.resin_treat.tooltip[1]"))
+                    ))
+            )
+    );
+
+    public static final Item ENCHANTED_RESIN_CANDY = register(
+            "enchanted_resin_candy",
+            settings -> new ResinCandyItem(settings
+                    .maxCount(16)
+                    .rarity(Rarity.UNCOMMON)
+                    .component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+            )
+    );
+
     public static void initialize() {
         TNSCore.LOGGER.debug("Initialized TNS items");
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(fabricItemGroupEntries -> {
-            fabricItemGroupEntries.add(TREE_BANNER_PATTERN);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
+            entries.add(TREE_BANNER_PATTERN);
         });
 
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(fabricItemGroupEntries -> {
-            fabricItemGroupEntries.add(HAPPY_GHAST_TREAT);
-            fabricItemGroupEntries.add(ENCHANTED_HAPPY_GHAST_TREAT);
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
+            entries.add(HAPPY_GHAST_TREAT);
+            entries.add(ENCHANTED_HAPPY_GHAST_TREAT);
+            entries.add(RESIN_CANDY);
+            entries.add(ENCHANTED_RESIN_CANDY);
         });
     }
 
