@@ -25,7 +25,7 @@ public class HappyGhastTreatItem extends SimplePolymerItem {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        World world = user.getWorld();
+        World world = user.getEntityWorld();
 
         if (world.isClient() || user.isSpectator()) {
             return ActionResult.PASS;
