@@ -17,19 +17,12 @@ public class TNSItemTagGenerator extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         valueLookupBuilder(ItemTags.HAPPY_GHAST_TEMPT_ITEMS)
-                .add(TNSCoreItems.ENCHANTED_HAPPY_GHAST_TREAT);
-
-        valueLookupBuilder(ConventionalItemTags.FOODS)
-                .add(TNSCoreItems.ENCHANTED_RESIN_CANDY)
-                .add(TNSCoreItems.RESIN_CANDY)
                 .add(TNSCoreItems.HAPPY_GHAST_TREAT);
 
-        valueLookupBuilder(ConventionalItemTags.CANDY_FOODS)
-                .add(TNSCoreItems.ENCHANTED_RESIN_CANDY)
-                .add(TNSCoreItems.RESIN_CANDY);
+        valueLookupBuilder(ConventionalItemTags.FOODS)
+                .add(TNSCoreItems.HAPPY_GHAST_TREAT);
 
         valueLookupBuilder(ConventionalItemTags.ANIMAL_FOODS)
-                .add(TNSCoreItems.HAPPY_GHAST_TREAT)
-                .add(TNSCoreItems.ENCHANTED_HAPPY_GHAST_TREAT);
+                .add(TNSCoreItems.HAPPY_GHAST_TREAT);
     }
 }

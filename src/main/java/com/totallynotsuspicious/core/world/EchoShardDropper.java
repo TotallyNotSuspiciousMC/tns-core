@@ -8,10 +8,6 @@ import net.minecraft.util.math.Vec3d;
 
 public final class EchoShardDropper {
     public static void tryDrop(ServerWorld serverWorld, BlockPos sensorPos) {
-        if (serverWorld.getRandom().nextInt(2) == 0) {
-            return;
-        }
-
         Vec3d pos = Vec3d.ofCenter(sensorPos);
 
         ItemEntity echoShard = new ItemEntity(

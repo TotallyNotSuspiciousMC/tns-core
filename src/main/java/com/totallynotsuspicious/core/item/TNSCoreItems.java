@@ -30,42 +30,8 @@ public final class TNSCoreItems {
     public static final Item HAPPY_GHAST_TREAT = register(
             "happy_ghast_treat",
             settings -> new HappyGhastTreatItem(
-                    settings
-                            .maxCount(16)
+                    settings.maxCount(16)
                             .rarity(Rarity.COMMON)
-                            .component(DataComponentTypes.LORE, new LoreComponent(
-                                    List.of(Text.translatable("item.tns-core.happy_ghast_treat.tooltip[0]"), Text.translatable("item.tns-core.happy_ghast_treat.tooltip[1]"))
-                            ))
-            )
-    );
-
-    public static final Item ENCHANTED_HAPPY_GHAST_TREAT = register(
-            "enchanted_happy_ghast_treat",
-            settings -> new EnchantedHappyGhastTreatItem(
-                    settings
-                            .maxCount(16)
-                            .rarity(Rarity.UNCOMMON)
-                            .component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
-            )
-    );
-
-    public static final Item RESIN_CANDY = register(
-            "resin_candy",
-            settings -> new ResinCandyItem(settings
-                    .maxCount(16)
-                    .rarity(Rarity.COMMON)
-                    .component(DataComponentTypes.LORE, new LoreComponent(
-                            List.of(Text.translatable("item.tns-core.resin_treat.tooltip[0]"), Text.translatable("item.tns-core.resin_treat.tooltip[1]"))
-                    ))
-            )
-    );
-
-    public static final Item ENCHANTED_RESIN_CANDY = register(
-            "enchanted_resin_candy",
-            settings -> new ResinCandyItem(settings
-                    .maxCount(16)
-                    .rarity(Rarity.UNCOMMON)
-                    .component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
             )
     );
 
@@ -78,9 +44,6 @@ public final class TNSCoreItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.add(HAPPY_GHAST_TREAT);
-            entries.add(ENCHANTED_HAPPY_GHAST_TREAT);
-            entries.add(RESIN_CANDY);
-            entries.add(ENCHANTED_RESIN_CANDY);
         });
     }
 

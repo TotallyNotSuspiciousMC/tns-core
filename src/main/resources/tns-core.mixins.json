@@ -4,15 +4,8 @@
     "compatibilityLevel": "JAVA_21",
     "mixins": [
         "AnvilScreenHandlerMixin",
-        "BlockItemMixin",
-        "EntityAccessor",
-        "PlayerManagerAccesor",
-        "PlayerSaveHandlerAccessor",
         "SculkBlockMixin",
-        "ServerCommonNetworkHandlerMixin",
-        "ServerCommonNetworkHandlerMixin$ServerPlayNetworkHandlerMixin",
-        "ShapedRecipeMixin",
-        "SlimeEntityMixin"
+        "ShapedRecipeMixin"
     ],
     "injectors": {
         "defaultRequire": 1

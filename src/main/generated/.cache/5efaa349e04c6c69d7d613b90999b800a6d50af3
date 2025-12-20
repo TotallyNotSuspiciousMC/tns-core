@@ -5,13 +5,11 @@ a58e17db8164fb31a9178402d4fdb83282a85639 data/tns-core/advancement/recipes/build
 debdbf8343e9be0c57aca38afab3f4b8967439ca data/tns-core/advancement/recipes/misc/ender_eye.json
 4fa1fbd070e4c8c368d930f7585986b3e61d669c data/tns-core/advancement/recipes/misc/glow_lichen.json
 6234ec3802cb6090ca95b466056ad62b91b32946 data/tns-core/advancement/recipes/misc/happy_ghast_treat.json
-a607b5c92995d7999a71d448ba5d6515e82328c4 data/tns-core/advancement/recipes/misc/resin_candy.json
 60ca276b62cfc166c0983e0029c19daa129d630b data/tns-core/advancement/recipes/misc/tree_banner_pattern.json
 e12ba198c678def0dbaa45102c215ac2b174e06c data/tns-core/recipe/ender_eye.json
 3f4dea3d0a64dd848e74ba302e082d339031ea6b data/tns-core/recipe/glow_lichen.json
 fc7f196fb7a2e247c244bd0bff51fd89fa0c1ec6 data/tns-core/recipe/happy_ghast_treat.json
 27afdbc5c89325b1396c7fda7de3991c5f950b95 data/tns-core/recipe/quartz.json
 b66dc4d077bf3b2da6a7b64311d0a9e29e6dbb67 data/tns-core/recipe/red_sand.json
-2ccbaf7490299bd6b932db9742bf3872c4cd6c2a data/tns-core/recipe/resin_candy.json
 7b58c1ad378e54eef2e68e87c96d9e7f0b6a728d data/tns-core/recipe/sponge.json
 e397f66a30e52f6f666d4dc639bfc614b53e3ea1 data/tns-core/recipe/tree_banner_pattern.json

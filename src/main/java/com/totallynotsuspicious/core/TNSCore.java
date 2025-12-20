@@ -3,15 +3,9 @@ package com.totallynotsuspicious.core;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.totallynotsuspicious.core.compat.TNSCorePlaceholders;
-import com.totallynotsuspicious.core.compat.TNSCoreSquareMapMarkers;
 import com.totallynotsuspicious.core.entity.TNSCoreStatusEffects;
 import com.totallynotsuspicious.core.entity.TNSLootModifiers;
 import com.totallynotsuspicious.core.item.TNSCoreItems;
-import com.totallynotsuspicious.core.nations.CustomEventHandlerRegistry;
-import com.totallynotsuspicious.core.nations.NationCommand;
-import com.totallynotsuspicious.core.nations.NationsManager;
-import com.totallynotsuspicious.core.nations.quiz.PersonalityQuizService;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -43,16 +37,8 @@ public class TNSCore implements ModInitializer {
             LOGGER.error("Unable to construct Polymer mod assets for {}", MOD_ID);
         }
 
-        NationsManager.initialize();
-        CustomEventHandlerRegistry.initialize();
-        TNSCorePlaceholders.initialize();
-        CommandRegistrationCallback.EVENT.register(NationCommand::registerCommand);
         CommandRegistrationCallback.EVENT.register(this::registerAboutCommand);
         TNSLootModifiers.initialize();
-        if (FabricLoader.getInstance().isModLoaded("squaremap")) {
-            ServerLifecycleEvents.SERVER_STARTED.register(new TNSCoreSquareMapMarkers());
-        }
-        PersonalityQuizService.initialize();
         TNSCoreItems.initialize();
         TNSCoreStatusEffects.initialize();
     }

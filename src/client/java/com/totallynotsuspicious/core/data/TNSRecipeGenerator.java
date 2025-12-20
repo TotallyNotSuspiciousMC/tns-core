@@ -75,13 +75,6 @@ public class TNSRecipeGenerator extends FabricRecipeProvider {
                         .input(Items.AMETHYST_SHARD)
                         .input(Items.SUGAR)
                         .offerTo(exporter);
-
-                createShapeless(RecipeCategory.MISC, TNSCoreItems.RESIN_CANDY)
-                        .criterion(hasItem(Items.RESIN_CLUMP), conditionsFromItem(Items.RESIN_CLUMP))
-                        .input(Items.RESIN_CLUMP)
-                        .input(Items.SUGAR)
-                        .input(Items.SUGAR)
-                        .offerTo(exporter);
             }
         };
     }
