@@ -7,12 +7,36 @@
         "map": "tns-core:overworld",
         "biomes": [
             {
-                "biome": "tns-core:deep_ancient_ocean",
-                "color": "#293dd6"
+                "biome": "minecraft:ocean",
+                "color": "#007bff"
             },
             {
-                "biome": "minecraft:ocean",
-                "color": "#006eff"
+                "biome": "minecraft:deep_ocean",
+                "color": "#046cdb"
+            },
+            {
+                "biome": "minecraft:cold_ocean",
+                "color": "#0e3bdf"
+            },
+            {
+                "biome": "minecraft:deep_cold_ocean",
+                "color": "#0d31b2"
+            },
+            {
+                "biome": "minecraft:frozen_ocean",
+                "color": "#4a8cf8"
+            },
+            {
+                "biome": "minecraft:deep_frozen_ocean",
+                "color": "#4d7bc8"
+            },
+            {
+                "biome": "minecraft:frozen_river",
+                "color": "#b2e7fc"
+            },
+            {
+                "biome": "minecraft:river",
+                "color": "#68a3fc"
             },
             {
                 "biome": "minecraft:plains",
@@ -43,24 +67,8 @@
                 "color": "#c1b6f5"
             },
             {
-                "biome": "minecraft:frozen_river",
-                "color": "#b2e7fc"
-            },
-            {
-                "biome": "minecraft:frozen_ocean",
-                "color": "#4a8cf8"
-            },
-            {
-                "biome": "minecraft:deep_frozen_ocean",
-                "color": "#4d7bc8"
-            },
-            {
                 "biome": "minecraft:snowy_taiga",
                 "color": "#546459"
-            },
-            {
-                "biome": "minecraft:river",
-                "color": "#68a3fc"
             },
             {
                 "biome": "minecraft:taiga",
@@ -117,14 +125,6 @@
             {
                 "biome": "minecraft:cherry_grove",
                 "color": "#fcc4e2"
-            },
-            {
-                "biome": "minecraft:cold_ocean",
-                "color": "#0e3bdf"
-            },
-            {
-                "biome": "minecraft:deep_cold_ocean",
-                "color": "#0d31b2"
             },
             {
                 "biome": "minecraft:taiga",
