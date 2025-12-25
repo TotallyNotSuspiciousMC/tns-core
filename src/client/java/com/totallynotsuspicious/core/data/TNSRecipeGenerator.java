@@ -39,20 +39,6 @@ public class TNSRecipeGenerator extends FabricRecipeProvider {
                         .input(Items.QUARTZ_BLOCK)
                         .offerTo(exporter);
 
-                createShaped(RecipeCategory.MISC, Items.ENDER_EYE)
-                        .group("ender_eye")
-                        .criterion(hasItem(Items.ENDER_PEARL), conditionsFromItem(Items.ENDER_PEARL))
-                        .pattern("#E#")
-                        .pattern("P*S")
-                        .pattern("#R#")
-                        .input('#', Items.BLAZE_POWDER)
-                        .input('E', Items.ECHO_SHARD)
-                        .input('P', Items.PRISMARINE_SHARD)
-                        .input('*', Items.ENDER_PEARL)
-                        .input('S', Items.SLIME_BALL)
-                        .input('R', Items.RESIN_CLUMP)
-                        .offerTo(exporter);
-
                 createShaped(RecipeCategory.BUILDING_BLOCKS, Items.SPONGE, 4)
                         .criterion(hasItem(Items.NAUTILUS_SHELL), conditionsFromItem(Items.NAUTILUS_SHELL))
                         .pattern("# #")
