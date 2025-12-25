@@ -3,10 +3,10 @@
     "category": "misc",
     "ingredients": [
         "minecraft:book",
-        "tns-core:enchanted_happy_ghast_treat",
-        "tns-core:enchanted_happy_ghast_treat",
-        "tns-core:enchanted_happy_ghast_treat",
-        "tns-core:enchanted_happy_ghast_treat"
+        "tns-core:happy_ghast_treat",
+        "tns-core:happy_ghast_treat",
+        "tns-core:happy_ghast_treat",
+        "tns-core:happy_ghast_treat"
     ],
     "result": {
         "components": {
