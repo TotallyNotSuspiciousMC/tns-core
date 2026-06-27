@@ -22,8 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 
-import static com.mojang.brigadier.builder.LiteralArgumentBuilder.literal;
-
 
 public class TNSCore implements ModInitializer {
     public static final String MOD_ID = "tns-core";
@@ -51,26 +49,27 @@ public class TNSCore implements ModInitializer {
             CommandBuildContext registryAccess,
             Commands.CommandSelection environment
     ) {
-        LiteralArgumentBuilder<CommandSourceStack> tns = literal("tns")
-                .then(literal("about")
-                        .executes(ctx -> {
-                            ctx.getSource().sendFeedback(
-                                    () -> Component.literal(
-                                                    "Copyright (C) 2025 TotallyNotSuspiciousMC. This server relies upon the TNS Core mod, which is free software licensed under AGPL-3.0-or-later. You may obtain a copy of the full license and corresponding source at: "
-                                            )
-                                            .append(Component.literal("https://github.com/TotallyNotSuspiciousMC/tns-core").setStyle(
-                                                    Style.EMPTY
-                                                            .withUnderlined(true)
-                                                            .withColor(ChatFormatting.BLUE)
-                                                            .withClickEvent(new ClickEvent.OpenUrl(URI.create("https://github.com/TotallyNotSuspiciousMC/tns-core")))
-                                            )),
-                                    false
-                            );
-
-                            return Command.SINGLE_SUCCESS;
-                        })
-                );
+        LiteralArgumentBuilder<CommandSourceStack> tns = Commands.literal("tns")
+                .then(Commands.literal("about").executes(ctx -> runAbout(ctx.getSource())));
 
         dispatcher.register(tns);
+    }
+
+    private static int runAbout(CommandSourceStack source) {
+        final String src = "https://github.com/TotallyNotSuspiciousMC/tns-core";
+
+        source.sendSuccess(
+                () -> Component.literal(
+                                "Copyright (C) 2025 TotallyNotSuspiciousMC. This server relies upon the TNS Core mod, which is free software licensed under AGPL-3.0-or-later. You may obtain a copy of the full license and corresponding source at: "
+                        )
+                        .append(Component.literal(src).setStyle(
+                                Style.EMPTY
+                                        .withUnderlined(true)
+                                        .withColor(ChatFormatting.BLUE)
+                                        .withClickEvent(new ClickEvent.OpenUrl(URI.create(src)))
+                        )),
+                false
+        );
+        return Command.SINGLE_SUCCESS;
     }
 }

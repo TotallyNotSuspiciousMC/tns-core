@@ -1,6 +1,7 @@
 package com.totallynotsuspicious.core.tag;
 
 import com.totallynotsuspicious.core.item.TNSCoreItemIds;
+import com.totallynotsuspicious.core.item.TNSCoreItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
@@ -19,6 +20,12 @@ public class TNSItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
     protected void addTags(HolderLookup.Provider registries) {
         builder(ItemTags.HAPPY_GHAST_TEMPT_ITEMS)
                 .add(TNSCoreItemIds.HAPPY_GHAST_TREAT);
+
+        builder(TNSCoreItemTags.HAPPY_GHAST_TREAT)
+                .add(TNSCoreItemIds.HAPPY_GHAST_TREAT);
+
+        builder(ItemTags.HAPPY_GHAST_FOOD)
+                .addOptionalTag(TNSCoreItemTags.HAPPY_GHAST_TREAT);
 
         builder(ConventionalItemTags.FOODS)
                 .add(TNSCoreItemIds.HAPPY_GHAST_TREAT);

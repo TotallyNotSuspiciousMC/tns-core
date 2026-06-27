@@ -4,6 +4,8 @@
     "compatibilityLevel": "JAVA_21",
     "mixins": [
         "AnvilMenuMixin",
+        "HappyGhastMixin",
+        "ItemMixin",
         "SculkBlockMixin",
         "ShapedRecipeMixin"
     ],
