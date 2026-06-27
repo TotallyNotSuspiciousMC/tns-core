@@ -20,12 +20,6 @@
 		],
 		"fabric-datagen": [
 			"com.totallynotsuspicious.core.TNSCoreDataGenerator"
-		],
-		"cardinal-components-entity": [
-			"com.totallynotsuspicious.core.entity.component.TNSCoreEntityComponents"
-		],
-		"cardinal-components-chunk": [
-			"com.totallynotsuspicious.core.world.TNSCoreChunkComponents"
 		]
 	},
 	"mixins": [
@@ -40,16 +34,9 @@
 		"minecraft": "1.21.11",
 		"java": ">=21",
 		"fabric-api": "*",
-		"cardinal-components-base": "*",
 		"fabric-permissions-api-v0": "*",
 		"placeholder-api": "*"
 	},
 	"suggests": {
-	},
-	"custom": {
-		"cardinal-components": [
-			"tns-core:player_nation",
-			"tns-core:nation_claim"
-		]
 	}
 }

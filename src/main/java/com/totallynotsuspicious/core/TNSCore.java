@@ -9,22 +9,21 @@ import com.totallynotsuspicious.core.item.TNSCoreItems;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.ClickEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 
-import static net.minecraft.server.command.CommandManager.literal;
+import static com.mojang.brigadier.builder.LiteralArgumentBuilder.literal;
+
 
 public class TNSCore implements ModInitializer {
     public static final String MOD_ID = "tns-core";
@@ -44,25 +43,25 @@ public class TNSCore implements ModInitializer {
     }
 
     public static Identifier id(String path) {
-        return Identifier.of(MOD_ID, path);
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
     private void registerAboutCommand(
-            CommandDispatcher<ServerCommandSource> dispatcher,
-            CommandRegistryAccess registryAccess,
-            CommandManager.RegistrationEnvironment environment
+            CommandDispatcher<CommandSourceStack> dispatcher,
+            CommandBuildContext registryAccess,
+            Commands.CommandSelection environment
     ) {
-        LiteralArgumentBuilder<ServerCommandSource> tns = literal("tns")
+        LiteralArgumentBuilder<CommandSourceStack> tns = literal("tns")
                 .then(literal("about")
                         .executes(ctx -> {
                             ctx.getSource().sendFeedback(
-                                    () -> Text.literal(
+                                    () -> Component.literal(
                                                     "Copyright (C) 2025 TotallyNotSuspiciousMC. This server relies upon the TNS Core mod, which is free software licensed under AGPL-3.0-or-later. You may obtain a copy of the full license and corresponding source at: "
                                             )
-                                            .append(Text.literal("https://github.com/TotallyNotSuspiciousMC/tns-core").setStyle(
+                                            .append(Component.literal("https://github.com/TotallyNotSuspiciousMC/tns-core").setStyle(
                                                     Style.EMPTY
-                                                            .withUnderline(true)
-                                                            .withColor(Formatting.BLUE)
+                                                            .withUnderlined(true)
+                                                            .withColor(ChatFormatting.BLUE)
                                                             .withClickEvent(new ClickEvent.OpenUrl(URI.create("https://github.com/TotallyNotSuspiciousMC/tns-core")))
                                             )),
                                     false

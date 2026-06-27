@@ -1,23 +1,23 @@
 package com.totallynotsuspicious.core.entity;
 
 import com.totallynotsuspicious.core.TNSCore;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public final class TNSCoreStatusEffects {
-    public static final RegistryEntry<StatusEffect> SWIFT_FLIGHT = registerReference(
+    public static final Holder<MobEffect> SWIFT_FLIGHT = registerHolder(
             "swift_flight",
-            new SimplePolymerStatusEffect(StatusEffectCategory.BENEFICIAL, 0x42f5f5)
+            new SimplePolymerStatusEffect(MobEffectCategory.BENEFICIAL, 0x42f5f5)
                     .addAttributeModifier(
-                            EntityAttributes.FLYING_SPEED,
+                            Attributes.FLYING_SPEED,
                             TNSCore.id("extra_speed_boost"),
                             0.5,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
                     )
     );
 
@@ -25,8 +25,8 @@ public final class TNSCoreStatusEffects {
         TNSCore.LOGGER.debug("init tns status effects");
     }
 
-    private static RegistryEntry<StatusEffect> registerReference(String name, StatusEffect statusEffect) {
-        return Registry.registerReference(Registries.STATUS_EFFECT, TNSCore.id(name), statusEffect);
+    private static Holder<MobEffect> registerHolder(String name, MobEffect statusEffect) {
+        return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, TNSCore.id(name), statusEffect);
     }
 
     private TNSCoreStatusEffects() {

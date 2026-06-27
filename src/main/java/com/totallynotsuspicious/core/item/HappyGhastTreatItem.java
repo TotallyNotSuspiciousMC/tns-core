@@ -15,11 +15,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
 import xyz.nucleoid.packettweaker.PacketContext;
 
 public class HappyGhastTreatItem extends SimplePolymerItem {
-    public HappyGhastTreatItem(Settings settings) {
+    public HappyGhastTreatItem(Item.Properties settings) {
         super(settings);
     }
 

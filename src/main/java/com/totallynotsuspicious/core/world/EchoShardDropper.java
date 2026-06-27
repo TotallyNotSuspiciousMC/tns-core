@@ -1,24 +1,25 @@
 package com.totallynotsuspicious.core.world;
 
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
 
 public final class EchoShardDropper {
-    public static void tryDrop(ServerWorld serverWorld, BlockPos sensorPos) {
-        Vec3d pos = Vec3d.ofCenter(sensorPos);
+    public static void tryDrop(ServerLevel serverWorld, BlockPos sensorPos) {
+        Vec3 pos = Vec3.atCenterOf(sensorPos);
 
         ItemEntity echoShard = new ItemEntity(
                 serverWorld,
                 pos.x,
                 pos.y,
                 pos.z,
-                Items.ECHO_SHARD.getDefaultStack()
+                Items.ECHO_SHARD.getDefaultInstance()
         );
 
-        serverWorld.spawnEntity(echoShard);
+        serverWorld.addFreshEntity(echoShard);
     }
 
     private EchoShardDropper() {

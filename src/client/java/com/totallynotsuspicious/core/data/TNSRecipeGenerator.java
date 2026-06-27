@@ -1,72 +1,72 @@
 package com.totallynotsuspicious.core.data;
 
 import com.totallynotsuspicious.core.item.TNSCoreItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
 public class TNSRecipeGenerator extends FabricRecipeProvider {
-    public TNSRecipeGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public TNSRecipeGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
-    }
-
-    @Override
-    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registryLookup, RecipeExporter exporter) {
-        return new RecipeGenerator(registryLookup, exporter) {
-            @Override
-            public void generate() {
-                createShapeless(RecipeCategory.MISC, Items.GLOW_LICHEN)
-                        .criterion(hasItem(Items.GLOW_INK_SAC), conditionsFromItem(Items.GLOW_INK_SAC))
-                        .input(Items.VINE)
-                        .input(Items.GLOW_INK_SAC)
-                        .offerTo(exporter);
-
-                createShapeless(RecipeCategory.BUILDING_BLOCKS, Items.RED_SAND)
-                        .criterion(hasItem(Items.SAND), conditionsFromItem(Items.SAND))
-                        .input(Items.SAND)
-                        .input(Items.REDSTONE)
-                        .offerTo(exporter);
-
-                createShapeless(RecipeCategory.BUILDING_BLOCKS, Items.QUARTZ, 4)
-                        .criterion(hasItem(Items.QUARTZ), conditionsFromItem(Items.QUARTZ))
-                        .input(Items.QUARTZ_BLOCK)
-                        .offerTo(exporter);
-
-                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.SPONGE, 4)
-                        .criterion(hasItem(Items.NAUTILUS_SHELL), conditionsFromItem(Items.NAUTILUS_SHELL))
-                        .pattern("# #")
-                        .pattern("NFN")
-                        .pattern("# #")
-                        .input('#', ItemTags.WOOL)
-                        .input('N', Items.NAUTILUS_SHELL)
-                        .input('F', Items.PUFFERFISH)
-                        .offerTo(exporter);
-
-                createShapeless(RecipeCategory.MISC, TNSCoreItems.TREE_BANNER_PATTERN)
-                        .criterion("has_saplings", conditionsFromTag(ItemTags.SAPLINGS))
-                        .input(ItemTags.SAPLINGS)
-                        .input(Items.PAPER)
-                        .offerTo(exporter);
-
-                createShapeless(RecipeCategory.MISC, TNSCoreItems.HAPPY_GHAST_TREAT)
-                        .criterion(hasItem(Items.SNOWBALL), conditionsFromItem(Items.SNOWBALL))
-                        .input(Items.SNOWBALL)
-                        .input(Items.AMETHYST_SHARD)
-                        .input(Items.SUGAR)
-                        .offerTo(exporter);
-            }
-        };
     }
 
     @Override
     public String getName() {
         return "TNSRecipeGenerator";
+    }
+
+    @Override
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        return new RecipeProvider(registries, output) {
+            @Override
+            public void buildRecipes() {
+                shapeless(RecipeCategory.MISC, Items.GLOW_LICHEN)
+                        .unlockedBy(getHasName(Items.GLOW_INK_SAC), has(Items.GLOW_INK_SAC))
+                        .requires(Items.VINE)
+                        .requires(Items.GLOW_INK_SAC)
+                        .save(output);
+
+                shapeless(RecipeCategory.BUILDING_BLOCKS, Items.RED_SAND)
+                        .unlockedBy(getHasName(Items.SAND), has(Items.SAND))
+                        .requires(Items.SAND)
+                        .requires(Items.REDSTONE)
+                        .save(output);
+
+                shapeless(RecipeCategory.BUILDING_BLOCKS, Items.QUARTZ, 4)
+                        .unlockedBy(getHasName(Items.QUARTZ), has(Items.QUARTZ))
+                        .requires(Items.QUARTZ_BLOCK)
+                        .save(output);
+
+                shaped(RecipeCategory.BUILDING_BLOCKS, Items.SPONGE, 4)
+                        .unlockedBy(getHasName(Items.NAUTILUS_SHELL), has(Items.NAUTILUS_SHELL))
+                        .pattern("# #")
+                        .pattern("NFN")
+                        .pattern("# #")
+                        .define('#', ItemTags.WOOL)
+                        .define('N', Items.NAUTILUS_SHELL)
+                        .define('F', Items.PUFFERFISH)
+                        .save(output);
+
+                shapeless(RecipeCategory.MISC, TNSCoreItems.TREE_BANNER_PATTERN)
+                        .unlockedBy("has_saplings", has(ItemTags.SAPLINGS))
+                        .requires(ItemTags.SAPLINGS)
+                        .requires(Items.PAPER)
+                        .save(output);
+
+                shapeless(RecipeCategory.MISC, TNSCoreItems.HAPPY_GHAST_TREAT)
+                        .unlockedBy(getHasName(Items.SNOWBALL), has(Items.SNOWBALL))
+                        .requires(Items.SNOWBALL)
+                        .requires(Items.AMETHYST_SHARD)
+                        .requires(Items.SUGAR)
+                        .save(output);
+            }
+        };
     }
 }

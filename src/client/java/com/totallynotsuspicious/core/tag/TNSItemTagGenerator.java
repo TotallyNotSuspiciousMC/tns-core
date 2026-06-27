@@ -1,28 +1,29 @@
 package com.totallynotsuspicious.core.tag;
 
-import com.totallynotsuspicious.core.item.TNSCoreItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import com.totallynotsuspicious.core.item.TNSCoreItemIds;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.ItemTags;
+import org.jspecify.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class TNSItemTagGenerator extends FabricTagProvider.ItemTagProvider {
-    public TNSItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(output, registriesFuture);
+public class TNSItemTagGenerator extends FabricTagsProvider.ItemTagsProvider {
+    public TNSItemTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookupFuture, @Nullable BlockTagsProvider blockTagsProvider) {
+        super(output, registryLookupFuture, blockTagsProvider);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        valueLookupBuilder(ItemTags.HAPPY_GHAST_TEMPT_ITEMS)
-                .add(TNSCoreItems.HAPPY_GHAST_TREAT);
+    protected void addTags(HolderLookup.Provider registries) {
+        builder(ItemTags.HAPPY_GHAST_TEMPT_ITEMS)
+                .add(TNSCoreItemIds.HAPPY_GHAST_TREAT);
 
-        valueLookupBuilder(ConventionalItemTags.FOODS)
-                .add(TNSCoreItems.HAPPY_GHAST_TREAT);
+        builder(ConventionalItemTags.FOODS)
+                .add(TNSCoreItemIds.HAPPY_GHAST_TREAT);
 
-        valueLookupBuilder(ConventionalItemTags.ANIMAL_FOODS)
-                .add(TNSCoreItems.HAPPY_GHAST_TREAT);
+        builder(ConventionalItemTags.ANIMAL_FOODS)
+                .add(TNSCoreItemIds.HAPPY_GHAST_TREAT);
     }
 }

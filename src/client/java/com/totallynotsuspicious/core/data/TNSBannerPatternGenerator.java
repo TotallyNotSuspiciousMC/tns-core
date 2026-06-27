@@ -2,28 +2,28 @@ package com.totallynotsuspicious.core.data;
 
 import com.totallynotsuspicious.core.TNSCore;
 import com.totallynotsuspicious.core.item.TNSBannerPatterns;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.block.entity.BannerPattern;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
 import java.util.concurrent.CompletableFuture;
 
 public class TNSBannerPatternGenerator extends FabricDynamicRegistryProvider {
-    public TNSBannerPatternGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public TNSBannerPatternGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
-    }
-
-    @Override
-    protected void configure(RegistryWrapper.WrapperLookup registries, Entries entries) {
-        entries.add(
-                TNSBannerPatterns.TREE,
-                new BannerPattern(TNSCore.id("tree"), "block.tnscore.banner.tree")
-        );
     }
 
     @Override
     public String getName() {
         return "TNSBannerPatternGenerator";
+    }
+
+    @Override
+    protected void configure(HolderLookup.Provider registries, Entries entries) {
+        entries.add(
+                TNSBannerPatterns.TREE,
+                new BannerPattern(TNSCore.id("tree"), "block.tnscore.banner.tree")
+        );
     }
 }
