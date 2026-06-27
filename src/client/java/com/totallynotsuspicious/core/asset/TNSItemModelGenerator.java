@@ -21,5 +21,6 @@ public class TNSItemModelGenerator extends FabricModelProvider {
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
         itemModelGenerators.generateFlatItem(TNSCoreItems.TREE_BANNER_PATTERN, ModelTemplates.FLAT_ITEM);
+        itemModelGenerators.generateFlatItem(TNSCoreItems.HAPPY_GHAST_TREAT, ModelTemplates.FLAT_ITEM);
     }
 }

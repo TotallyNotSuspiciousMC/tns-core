@@ -1,13 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "minecraft:snowball",
     "minecraft:amethyst_shard",
     "minecraft:sugar"
   ],
   "result": {
-    "count": 1,
     "id": "tns-core:happy_ghast_treat"
   }
 }
