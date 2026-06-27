@@ -3,6 +3,7 @@
     "package": "com.totallynotsuspicious.core.mixin",
     "compatibilityLevel": "JAVA_25",
     "mixins": [
+        "AnimalAccessor",
         "AnvilMenuMixin",
         "HappyGhastMixin",
         "ItemMixin",
