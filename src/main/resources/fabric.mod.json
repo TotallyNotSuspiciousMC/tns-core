@@ -35,7 +35,8 @@
 		"java": ">=21",
 		"fabric-api": "*",
 		"fabric-permissions-api-v0": "*",
-		"placeholder-api": "*"
+		"placeholder-api": "*",
+		"terralith": "*"
 	},
 	"suggests": {
 	}
