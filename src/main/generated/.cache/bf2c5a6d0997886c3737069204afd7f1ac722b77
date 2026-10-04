@@ -1,0 +1,6 @@
+// 26.3	-999999999-01-01T00:00:00	TNS Core/Tags for minecraft:item
+84bb6264a4a68ce2ad8f84fed1955d81994ad8d1 data/c/tags/item/animal_foods.json
+84bb6264a4a68ce2ad8f84fed1955d81994ad8d1 data/c/tags/item/foods.json
+295d63254c21b8ad7ba88d888e6f3ad5de7e3c5f data/minecraft/tags/item/happy_ghast_food.json
+84bb6264a4a68ce2ad8f84fed1955d81994ad8d1 data/minecraft/tags/item/happy_ghast_tempt_items.json
+84bb6264a4a68ce2ad8f84fed1955d81994ad8d1 data/tns-core/tags/item/happy_ghast_treat.json

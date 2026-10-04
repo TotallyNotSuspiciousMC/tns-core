@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tns-core:glow_lichen"
+        "recipes": "tns-core:glow_lichen"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

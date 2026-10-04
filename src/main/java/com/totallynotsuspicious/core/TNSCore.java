@@ -51,9 +51,9 @@ public class TNSCore implements ModInitializer {
                         ModificationPhase.REMOVALS,
                         BiomeSelectors.foundInOverworld(),
                         (biomeSelectionContext, biomeModificationContext) -> {
-                            biomeModificationContext.getGenerationSettings().removeFeature(placedFeatureResourceKey("snowy/layer/first"));
-                            biomeModificationContext.getGenerationSettings().removeFeature(placedFeatureResourceKey("snowy/layer/second"));
-                            biomeModificationContext.getGenerationSettings().removeFeature(placedFeatureResourceKey("snowy/layer/third"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("snowy/layer/first"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("snowy/layer/second"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("snowy/layer/third"));
                         }
                 );
     }
@@ -62,7 +62,7 @@ public class TNSCore implements ModInitializer {
         return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
-    private static ResourceKey<PlacedFeature> placedFeatureResourceKey(String path) {
+    private static ResourceKey<PlacedFeature> terralithPlacedFeature(String path) {
         return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath("terralith", path));
     }
 

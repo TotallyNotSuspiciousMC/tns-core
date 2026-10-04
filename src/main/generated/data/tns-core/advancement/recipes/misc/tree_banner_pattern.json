@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tns-core:tree_banner_pattern"
+        "recipes": "tns-core:tree_banner_pattern"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

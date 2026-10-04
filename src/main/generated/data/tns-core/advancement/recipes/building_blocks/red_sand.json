@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tns-core:red_sand"
+        "recipes": "tns-core:red_sand"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

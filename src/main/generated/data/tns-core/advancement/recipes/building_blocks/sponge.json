@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tns-core:sponge"
+        "recipes": "tns-core:sponge"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "tns-core:happy_ghast_treat"
+        "recipes": "tns-core:happy_ghast_treat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
