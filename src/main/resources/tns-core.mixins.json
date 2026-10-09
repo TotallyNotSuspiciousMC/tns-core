@@ -5,6 +5,7 @@
     "mixins": [
         "AnimalAccessor",
         "AnvilMenuMixin",
+        "CreeperMixin",
         "HappyGhastMixin",
         "ItemMixin",
         "SculkBlockMixin",
