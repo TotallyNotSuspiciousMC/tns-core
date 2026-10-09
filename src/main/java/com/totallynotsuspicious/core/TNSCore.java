@@ -54,6 +54,12 @@ public class TNSCore implements ModInitializer {
                             biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("snowy/layer/first"));
                             biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("snowy/layer/second"));
                             biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("snowy/layer/third"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("canyon/generic/slab_stone"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("erosion/slabs"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("canyon/sandstone/slab"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("canyon/sandstone/slab_smooth"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("jungle/mountains/slab_stone"));
+                            biomeModificationContext.getGenerationSettings().removeFeature(terralithPlacedFeature("jungle/mountains/slab_andesite"));
                         }
                 );
     }
